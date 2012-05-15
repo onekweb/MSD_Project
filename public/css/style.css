@@ -1,12 +1,20 @@
+@charset:UTF-8;
+
 body {
-	/*background-image: url("img/hexellence.png");*/
-	background-color: black;
+	background-image: url("img/hexellence.png");
+	width:  850px;
+	margin: 75px auto 0 auto;
 }
 
 .list{
-	background-color: white;
+	float: left;
 }
 
 .search {
-	background-color: white;
+	float: right;
+}
+
+.main {
+	background-color: red;
+	height: 700px;
 }
