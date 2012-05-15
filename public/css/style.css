@@ -15,6 +15,6 @@ body {
 }
 
 .main {
-	background-color: red;
+	border: 1px solid black;
 	height: 700px;
 }
