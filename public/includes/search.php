@@ -1,0 +1,4 @@
+<?php // search.php
+
+
+?>
