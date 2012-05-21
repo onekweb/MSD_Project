@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Värd: localhost
--- Skapad: 15 maj 2012 kl 13:42
+-- Skapad: 21 maj 2012 kl 13:38
 -- Serverversion: 5.5.16
 -- PHP-version: 5.3.8
 
@@ -60,10 +60,10 @@ CREATE TABLE IF NOT EXISTS `artists` (
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur `contain`
+-- Tabellstruktur `contains_a_s`
 --
 
-CREATE TABLE IF NOT EXISTS `contain` (
+CREATE TABLE IF NOT EXISTS `contains_a_s` (
   `albums_id` int(11) NOT NULL,
   `songs_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -71,10 +71,10 @@ CREATE TABLE IF NOT EXISTS `contain` (
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur `contains`
+-- Tabellstruktur `contains_s_p`
 --
 
-CREATE TABLE IF NOT EXISTS `contains` (
+CREATE TABLE IF NOT EXISTS `contains_s_p` (
   `playlists_id` int(11) NOT NULL,
   `songs_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
