@@ -3,9 +3,11 @@ require ('function/allfunctions.php');
 require ('connection.php');
 interface Isearch
 {
+	public  function search();
 	public function connection();
 	public function dexonnection();
 	public function users();
+	public function createPlaylist();
 	public function showAartist();
 	public function showAlbum();
 	public function showGenre();
@@ -16,7 +18,7 @@ interface Isearch
 }
 class Search implements Isearch
 {
-	public $search;
+	public $search = NULL;
 	public function __construct()
 	{
 	 global $connection, $db_select;
@@ -26,14 +28,33 @@ class Search implements Isearch
 	}
 	public function search()
 	{
-		$this-> search = $_POST['search'];
 		if(isset($this->search))
 		{
 			$this->connection;
 			$this->db_select;
-			$sql = mysql_query("SELECT * FROM $this->db_select WHERE artists, album, songs LIKE % $this->search%");
-			$result = mysql_fetch_row($sql);
-			echo "There is ".$result;
+			$result = mysql_query("
+			SELECT name
+			FROM artists
+			WHERE name LIKE  '%$this->search%'") or die('Failed to connect'.mysql_error());
+			while($row = mysql_fetch_array($result))
+			{
+				echo $row['name'];
+				if($row != mysql_fetch_array($result))
+				{
+					echo "Wrong";
+				}
+			}
+			
+			if($this->search == '')
+			{
+				echo"You have to write something on the searchfield";
+			}
+			else
+			{
+				echo "Could not found a result";		
+			}
+			 
+		
 		}
 		
 	}
@@ -50,6 +71,10 @@ class Search implements Isearch
 	public function users()
 	{
 		
+	}
+	public function createPlaylist()
+	{
+			
 	}
 	
 	public function showAartist()
