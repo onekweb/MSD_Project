@@ -16,19 +16,19 @@
 			</header>
 			<br />
 			<div class="list">
-				Här raddas låtar och sånt upp.
+				Här raddas låtar som man har valt tidigare.
 			</div>
 		
 			<form method="post" action="./includes/search.php" class="search">
 				<input type="text" placeholder="Sök..">
 				<input type="submit" value="Sök">
 			</form>
-			<form method="post" action="./playlist.php" class="playlist">
-				<input type="submit" value="Skapa spellista">
-				<input type="submit" value="Lägg till i exicterande spellista">
+			<form method="post" action="./includes/playlist.php" class="playlist">
+				<input type="text" placeholder="Ange namn för spellistan.">
+				<input type="submit" value="OK">
 			</form>
 			<div class="examples">
-				Här kommer artist exemplel upp.
+				Här visas sina egna playlists.
 			</div>
 			<br />
 			<footer>
