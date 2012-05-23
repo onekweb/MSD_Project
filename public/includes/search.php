@@ -28,20 +28,17 @@ class Search implements Isearch
 	}
 	public function search()
 	{
-		
-		$mysqli = $this->connection;
-		
-
-			$name = "Mario";
+			$mysqli = $this->connection;
+			$name = "Michael";
 			$id = 1;	
-			$query ="SELECT * FROM artists WHERE name=?";
+			$query ="SELECT * FROM artists";
 			$stmt = $mysqli->prepare($query);
-			$stmt->bind_param('s', $name);
+			//$stmt->bind_param('s', $name);
 			$stmt->execute(); 
 			$stmt->bind_result($id, $name, $genre);
 			while($stmt->fetch()){
-				print_r($id);
-				echo $name . " " . $genre;
+				//print_r($id);
+				echo $id ." ".$name . " " . $genre;
 			}  
 			
   /*
