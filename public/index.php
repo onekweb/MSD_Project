@@ -20,8 +20,8 @@
 			</div>
 		
 			<form method="post" action="./includes/search.php" class="search">
-				<input type="text" placeholder="Sök..">
-				<input type="submit" value="Sök">
+				<input type="text" name="search" placeholder="Sök..">
+				<input type="submit" name ="value"value="Sök">
 			</form>
 			<form method="post" action="./playlist.php" class="playlist">
 				<input type="submit" value="Skapa spellista">
