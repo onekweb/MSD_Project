@@ -30,9 +30,13 @@ class Search implements Isearch
 	{
 		if(isset($this->search))
 		{
-			$this->connection;
+			$stmt = $this->connection->prepare("SELECT name FROM artist WHERE name LIKE '%$this->search%'");
+			$stmt->bind_result($name, $search);
+			$stmt->execute();
+			$stmt->store_result();
+			/*$this->connection;
 			$this->db_select;
-			$result = mysql_query("
+			 $result = mysql_query("
 			SELECT name
 			FROM artists
 			WHERE name LIKE  '%$this->search%'") or die('Failed to connect'.mysql_error());
@@ -54,7 +58,7 @@ class Search implements Isearch
 				echo "Could not found a result";		
 			}
 			 
-		
+		*/
 		}
 		
 	}
