@@ -24,22 +24,33 @@ class Search implements Isearch
 	 global $connection, $db_select;
 	 $this->connection = $connection;
 	 $this->db_select = $db_select;
-	 //$this->search =  $_POST['search'];	
+	 $this->search =  $_POST['search'];	
 	}
+	
 	public function search()
 	{
+		 $this->search;
+		if(isset($this->search))
+		{
+			$this->search;
 			$mysqli = $this->connection;
-			$name = "Michael";
-			$id = 1;	
-			$query ="SELECT * FROM artists";
+			$name = $this->search;
+			//$id = 1;	
+			$query ="SELECT * FROM artists WHERE name LIKE '%$this->search%' ";
 			$stmt = $mysqli->prepare($query);
 			//$stmt->bind_param('s', $name);
 			$stmt->execute(); 
 			$stmt->bind_result($id, $name, $genre);
-			while($stmt->fetch()){
-				//print_r($id);
-				echo $id ." ".$name . " " . $genre;
-			}  
+			while($stmt->fetch())
+			{
+
+				echo 'The result found: '. $name;
+			}
+		}
+		else{
+			echo "Error";
+		} 
+	} 
 			
   /*
 		if(isset($this->search))
@@ -78,7 +89,7 @@ class Search implements Isearch
 	
 		}*/
 		
-	}
+
 	public function connection()
 	{
 		
