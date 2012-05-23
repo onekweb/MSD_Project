@@ -22,7 +22,7 @@ class Search implements Isearch
 	public function __construct()
 	{
 	 global $connection, $db_select;
-	 $this->connection = $connection;
+	 /*$this->connection = $connection;*/
 	 $this->db_select = $db_select;
 	 $this->search =  $_POST['search'];	
 	}
@@ -30,10 +30,12 @@ class Search implements Isearch
 	{
 		if(isset($this->search))
 		{
-			$stmt = $this->connection->prepare("SELECT name FROM artist WHERE name LIKE '%$this->search%'");
-			$stmt->bind_result($name, $search);
-			$stmt->execute();
-			$stmt->store_result();
+			$query = "SELECT * FROM artist WHERE name=? LIKE '%this->search%'=?";
+			$stmt = $connection->prepare($query);
+			$stmt->bind_param("s", $name, $search);
+			$stmt->bind_result($result);
+			$stmt->fetch();
+
 			/*$this->connection;
 			$this->db_select;
 			 $result = mysql_query("
