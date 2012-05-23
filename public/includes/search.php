@@ -22,17 +22,26 @@ class Search implements Isearch
 	public function __construct()
 	{
 	 global $connection, $db_select;
-	 /*$this->connection = $connection;*/
+	 $this->connection = $connection;
 	 $this->db_select = $db_select;
 	 $this->search =  $_POST['search'];	
 	}
 	public function search()
 	{
-		if(isset($this->search))
+			$this->connection;
+			$name = "mario";
+			$id = 1;	
+			$query = "SELECT * FROM users WHERE name=? AND id=?";
+			$stmt = $this->connection->prepare($query);
+			$stmt->bind_param($name,"name" . $id, "id"); 
+			$stmt->bind_result($result);
+			$stmt->fetch();  
+		/*if(isset($this->search))
 		{
+			$this->connection;
 			$query = "SELECT * FROM artist WHERE name=? LIKE '%this->search%'=?";
-			$stmt = $connection->prepare($query);
-			$stmt->bind_param("s", $name, $search);
+			$stmt = $this->connection->prepare($query);
+			$stmt->bind_Param('name', $name, PDO::PARAM_STR, 12);
 			$stmt->bind_result($result);
 			$stmt->fetch();
 
@@ -60,8 +69,8 @@ class Search implements Isearch
 				echo "Could not found a result";		
 			}
 			 
-		*/
-		}
+	
+		}*/
 		
 	}
 	public function connection()
