@@ -21,7 +21,7 @@
 		
 			<form method="post" action="./includes/search.php" class="search">
 				<input type="text" name="search" placeholder="Sök..">
-				<input type="submit" name ="value"value="Sök">
+				<input type="submit" name ="value" value="Sök">
 			</form>
 			<form method="post" action="./playlist.php" class="playlist">
 				<input type="submit" value="Skapa spellista">
