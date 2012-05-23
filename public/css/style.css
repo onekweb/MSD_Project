@@ -6,12 +6,46 @@ body {
 	margin: 75px auto 0 auto;
 }
 
+header, footer {
+	background-color: blue;
+}
+
+header {
+	height: 75px;
+}
+
+footer {
+	height: 75px;
+	margin-top: 512px;
+}
+
+.examples, .list {
+	background-color: red;
+	margin: 10px;
+	border: 1px solid black;
+}
+
 .list{
 	float: left;
+	height: 500px;
+	width: 400px;
+}
+
+.examples {
+	float: right;
+	width: 225px;
+	height: 390px;
 }
 
 .search {
 	float: right;
+	margin: 10px;
+}
+
+.playlist {
+	float: right;
+	width: 100px;
+	margin: 50px -110px 10px 10px;
 }
 
 .main {
