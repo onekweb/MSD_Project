@@ -57,7 +57,7 @@ class Search implements Isearch  // The class for all function
 	public function listing() { //Function for lsting objects
 	
 		$mysqli = $this->connection;
-		$query ="SELECT `artist`.`name`, `albums`.`album`, FROM `artist` LEFT JOIN `albums` ON `artists`.`id`=`albums`.`artists_id`";
+		$query ="SELECT artists.name, albums.album FROM artists LEFT JOIN albums ON artists.id=albums.artists_id";
 		$stmt = $mysqli->prepare($query);
 		$stmt->execute();
 		$stmt->bind_result($results);
