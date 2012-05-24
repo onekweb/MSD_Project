@@ -4,6 +4,7 @@ require ('connection.php'); //Link to connection
 interface Isearch  // Order all the functions
 {
 	public  function search(); // Function for search
+	public function listing(); //Function for lsting objects
 	public function connection(); // Function for connection
 	public function dexonnection(); // Function for dexonnetion
 	public function users(); // Function for users login
@@ -28,7 +29,8 @@ class Search implements Isearch  // The class for all function
 	 $this->search =  $_POST['search'];	
 	}
 	
-	public function search() // Function that searches everything in the database
+	/*SÖKFUNKTION
+	 * public function search() // Function that searches everything in the database
 	{	
 		if(isset($this->search)) // If the formular has been send, execute the code bellow
 		{
@@ -50,8 +52,24 @@ class Search implements Isearch  // The class for all function
 			echo "Error";
 		} 
 	} 
+	* END SÖKFUNKTION*/
 
-
+	public function listing() { //Function for lsting objects
+	
+		$mysqli = $this->connection;
+		$query ="SELECT `artist`.`name`, `albums`.`album`, FROM `artist` LEFT JOIN `albums` ON `artists`.`id`=`albums`.`artists_id`";
+		$stmt = $mysqli->prepare($query);
+		$stmt->execute();
+		$stmt->bind_result($results);
+		
+		while($stmt->fetch()) {
+			
+			echo $results;
+			
+		}
+	
+	}
+	
 	public function connection() //Functions for the connection to the server and the database
 	{
 		
