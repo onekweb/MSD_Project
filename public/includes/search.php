@@ -1,137 +1,99 @@
 <?php // search.php
-require ('function/allfunctions.php');
-require ('connection.php');
-interface Isearch
+require ('function/allfunctions.php'); // link to all the functions
+require ('connection.php'); //Link to connection
+interface Isearch  // Order all the functions
 {
-	public  function search();
-	public function connection();
-	public function dexonnection();
-	public function users();
-	public function createPlaylist();
-	public function showAartist();
-	public function showAlbum();
-	public function showGenre();
-	public function showSong();
-	public function showPlayList();
+	public  function search(); // Function for search
+	public function connection(); // Function for connection
+	public function dexonnection(); // Function for dexonnetion
+	public function users(); // Function for users login
+	public function createPlaylists(); // Function for creating the playlists
+	public function showAartists(); // Function for showing the artists
+	public function showAlbums(); //Function for showing albums
+	public function showGenres();// Function for showing genres
+	public function showSongs(); // Function for showing the shows
+	public function showPlayLists(); // Function for showing the playlists
 	
 	
 }
-class Search implements Isearch
+class Search implements Isearch  // The class for all function
 {
-	public $search = NULL;
-	public function __construct()
+	public $search = NULL; // init the search varibales with null
+	
+	public function __construct()  // Consctruct the variables
 	{
-	 global $connection, $db_select;
+	 global $connection;
 	 $this->connection = $connection;
-	 $this->db_select = $db_select;
+	 $this->connection = $connection;
 	 $this->search =  $_POST['search'];	
 	}
 	
-	public function search()
-	{
-		 $this->search;
-		if(isset($this->search))
+	public function search() // Function that searches everything in the database
+	{	
+		if(isset($this->search)) // If the formular has been send, execute the code bellow
 		{
-			$this->search;
-			$mysqli = $this->connection;
-			$name = $this->search;
-			//$id = 1;	
-			$query ="SELECT * FROM artists WHERE name LIKE '%$this->search%' ";
-			$stmt = $mysqli->prepare($query);
+			$mysqli = $this->connection; //Connections to the server and database 
+			$name = $this->search; 
+			$query ="SELECT * FROM artists WHERE name LIKE '%$this->search%' "; //The querie to select and match the post that´has been send
+			$stmt = $mysqli->prepare($query); //Prepeare the query 
 			//$stmt->bind_param('s', $name);
-			$stmt->execute(); 
-			$stmt->bind_result($id, $name, $genre);
-			while($stmt->fetch())
+			$stmt->execute();  // Executation of the statement
+			$stmt->bind_result($id, $name, $genre); // Bind the result in the table
+			while($stmt->fetch()) // loop and fetch the statement 
 			{
 
-				echo 'The result found: '. $name;
+				echo 'The result found: '. $name; // Print the result of the statement
 			}
 		}
-		else{
+		else  // else execute the code bellow
+		{ 
 			echo "Error";
 		} 
 	} 
-			
-  /*
-		if(isset($this->search))
-		{
-			$this->connection;
-			$query = "SELECT * FROM artist WHERE name=? LIKE '%this->search%'=?";
-			$stmt = $this->connection->prepare($query);
-			$stmt->bind_Param('name', $name, PDO::PARAM_STR, 12);
-			$stmt->bind_result($result);
-			$stmt->fetch();
 
-			$this->connection;
-			$this->db_select;
-			 $result = mysql_query("
-			SELECT name
-			FROM artists
-			WHERE name LIKE  '%$this->search%'") or die('Failed to connect'.mysql_error());
-			while($row = mysql_fetch_array($result))
-			{
-				echo $row['name'];
-				if($row != mysql_fetch_array($result))
-				{
-					echo "Wrong";
-				}
-			}
-			
-			if($this->search == '')
-			{
-				echo"You have to write something on the searchfield";
-			}
-			else
-			{
-				echo "Could not found a result";		
-			}
-			 
-	
-		}*/
-		
 
-	public function connection()
+	public function connection() //Functions for the connection to the server and the database
 	{
 		
 	}
 	
-	public function dexonnection()
+	public function dexonnection() //Function for the dexonnection
 	{
 		
 	}
 	
-	public function users()
+	public function users() // Function
 	{
 		
 	}
-	public function createPlaylist()
+	public function createPlaylists()// Function for creating the playlists
 	{
 			
 	}
 	
-	public function showAartist()
+	public function showAartists()// Function for showing the artists
 	{
 		
 	}
-	public function showAlbum()
+	public function showAlbums()//Function for showing albums
 	{
 		
 	}
 	
-	public function showGenre()
+	public function showGenres() //Function for showing genres
 	{
 		
 	}
-	public function showSong()
+	public function showSongs() // Function for showing the shows
 	{
 		
 	}
-	public function showPlayList()
+	public function showPlayLists()// Function for showing the playlists
 	{
 		
 	}
 }
-$newSearch = new Search();
-$newSearch->search();
+$newSearch = new Search(); // The instance of search´s class
+$newSearch->search(); // Printing out search function
 
 ?>
