@@ -34,46 +34,77 @@
 		</div
             <!-- #login-container ends here -->
 		<div id="wrapper">
+			<div id="stastic">
+				<h3>Stastic</h3>
+				<p class="statistic-text">Songs:<span class="stastic-number-songs">0</span></p>				
+				<p class="statistic-text">Artists:<span class="stastic-number-artists">0</span></p>
+				<p class="statistic-text">Albums:<span class="stastic-number-albums">0</span></p>				
+				<p class="statistic-text">Genres:<span class="stastic-number-genres">0</span></p>
+				
+			</div>
 			<div id="search-field">
 				<form action="./includes/functions.php" method="post">
 					<input type="text" name="search" class="input-search" placeholder="Search your music here...">
-					<input type="submit" name ="search" class="submit-search" value=""  >
-					
+					<input type="submit" name ="search" class="submit-search" value=""  >					
 			</form>
 			</div>
 			<!-- #search-field ends here-->
-			<div id="music-list">
-				<p>Lorem ipsum dolor s</p>				
-				<p>Lorem ipsum dolor s</p>				
-				<p>Lorem ipsum dolor s</p>
+			<div id="playlist-container">
+                <div style="clear:both"></div>
+                <div id="playlistnBox">                
+                    <form id="playlistForm">
+                        <fieldset id="add-playlist-body">
+                        	
+								<h3>Add playlist</h3>
+                            <fieldset>
+                                <label for="song">Song</label>
+                                <input type="text" name="song" id="song" />
+                            </fieldset>
+                            <fieldset>
+                                <label for="artist">Artist</label>
+                                <input type="text" name="artist" id="artist" />
+                            </fieldset>
+                            <fieldset>
+                                <label for="artist">Album</label>
+                                <input type="text" name="album" id="album" />
+                            </fieldset>
+                            <fieldset>
+                                <label for="artist">Genre</label>
+                                <select id="genre">
+								  <option>Gospel</option>
+								  <option>Pop</option>
+								  <option>Rock</option>
+								</select>
+                            </fieldset>
+                            <input type="submit" id="submit" name="registre-submit"value="Add playlist" />
+                            <label for="checkbox"><input type="checkbox" id="share" />Share with other users</label>
+                        </fieldset>
+                    </form>
+                </div>
 			</div>
-			<!--  #music-list ends here-->
-	
-			<div id="playlist">
-				<form method="post" action="./playlist.php">
-					<input type="submit" value="Skapa spellista">
-					<input type="submit" value="Lägg till i exicterande spellista">
-				</form>
-			</div>
-			<!-- #playlist ends here -->
-			<div class="artist-list">
-				<p>Lorem ipsum dolor s</p>				
-				<p>Lorem ipsum dolor s</p>				
-				<p>Lorem ipsum dolor s</p>
-				<p>Lorem ipsum dolor s</p>				
-				<p>Lorem ipsum dolor s</p>				
-				<p>Lorem ipsum dolor s</p>
-			</div>
-			<!-- #artist-list ends here-->
-			
-			<div id="footer">
-				<?php
-					include_once("./includes/footer.php");
-				?>
-			</div>
-			<!--  #footer ends here -->
+			<!--  #playlist-container ends here-->
+			<div id="addplay-list-body">
+				<fieldset id="play-list-body">
+					<table border="1" id="addplay-table">
+						<tbody>
+							<tr>
+								<h3>Playlists</h3>
+								<th>Songs</th><th>Artists</th><th>Albums</th><th>Genre</th>
+							</tr>
+						</tbody>
+					</table>
+				</fieldset>
+				
+			</div>	
 		</div>
 			<!--  #wrapper ends here -->
+		
+		<div id="footer">
+			<p>
+			&copy;2012| D.M.C | Mario Daniel & Daniel | Email: <a href="mario.onekanda@hotmail.com">Info@msd.se</a> | Adress: Madison square 7, 188 20 New york | Facebook: <href="#">Facebook.com/MSD</a> 
+			</p>
+		</div>
+		<!--  #footer ends here -->
 	</body>
 	
 </html>
