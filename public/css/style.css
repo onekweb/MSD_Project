@@ -1,14 +1,59 @@
 @charset"UTF-8";
-
+@import url('login.css');
+/* The style sheet is made by Mario, Sylvain & Daniel
+ * Blue color: #8684ee */
 body {
-	background-image: url("img/hexellence.png");
-	width:  850px;
-	margin: 75px auto 0 auto;
+	font-family: 	trebuchet MS,verdana, Geneva, Arial, Helvetica, sans-serif;
+	width: 			auto;
+	height:			auto;
+	font-size:  	14px;
+	color: 			#333;
+	margin: 		0px;
+	padding: 		0px;
+	background:		#8684ee;
+	/*background-image: url("img/hexellence.png"); */
 }
+a{}
 
-header, footer {
-	background-color: blue;
-}
+a.hover{}
+a img{}
+a img .hover{}
+h1{}
+h2{}
+h3{}
+h4{}
+h5{}
+p{}
+
+/* TOP*/ 
+#top
+{
+	width:			100%;
+	height: 		70px;
+	margin:			0 auto;
+	padding:		0px;
+	background: 	#000 url('../img/header-bg.png') no-repeat;
+	background-position: 230px 0px;
+	display: 		block;
+ 	
+ }
+#loginContainer
+{
+	width: 			100%;
+	height:			100%;
+	position:		absolute;
+	right: 			30px;
+} 
+/* WRAPPER*/ 
+#wrapper
+{
+	width:			950px;
+	height: 		auto;
+	margin:			0 auto;
+	padding:		5px;
+	background: 	#fff;
+ 	
+ }
 
 header {
 	height: 75px;
