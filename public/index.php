@@ -9,7 +9,7 @@
 	</head><!-- Head Ends -->
 	<body>
 		<div id="top">
-			<div id="loginContainer">
+			<div id="login-container">
                 <a href="#" id="loginButton"><span>Login</span><em></em></a>
                 <div style="clear:both"></div>
                 <div id="loginBox">                
@@ -31,30 +31,24 @@
                     </form>
                 </div>
             </div>
-		</div>
+		</div
+            <!-- #login-container ends here -->
 		<div id="wrapper">
-			
-            <!-- Login Ends Here -->
-			<div id ="header-content">
-				<?php
-					include_once("./includes/header.php");
-				?>
+			<div id="search-field">
+				<form action="./includes/functions.php" method="post">
+					<input type="text" name="search" class="input-search" placeholder="Search your music here...">
+					<input type="submit" name ="search" class="submit-search" value=""  >
+					
+			</form>
 			</div>
-			<!-- #header-content ends here-->
+			<!-- #search-field ends here-->
 			<div id="music-list">
 				<p>Lorem ipsum dolor s</p>				
 				<p>Lorem ipsum dolor s</p>				
 				<p>Lorem ipsum dolor s</p>
 			</div>
 			<!--  #music-list ends here-->
-			
-			<div id="search-field">
-				<form method="post" action="./includes/functions.php">
-					<input type="text" name="search" placeholder="Search...">
-					<input type="submit" name ="value" value="Search">
-				</form>
-			</div>
-			<!-- #search-field ends here-->
+	
 			<div id="playlist">
 				<form method="post" action="./playlist.php">
 					<input type="submit" value="Skapa spellista">
