@@ -71,69 +71,24 @@ p{}
 	width:			300px;
 	height:			50px;
 	margin:			0 auto;
-	padding:		0 !important;
+	padding-left:	10px;
 	background:		#000;
 	border:			none;
+	color: white;
 }
 .submit-search
 {
-	width			100px;
-	height: 		50px!important;
+	width:			89px;
+	height: 		52px;
 	background:		#000 url('../img/submit-btn.png') no-repeat;
 	background-position:center;		
-	border:			none !important;
+	border:			none;
 	display:		inline;
 	color:			#000;
 	padding:		25px;
-	-webkit-padding-start: 40px;
-	-webkit-padding-before: 30px;
+	-webkit-margin-after: -12px;
     position: 		relative;
     top: 			9px; 
-    -webkit-top-start:	60px;
     right:			4px;		
     cursor: 		pointer;
-}
-
-/*
-header {
-	height: 75px;
-}
-
-footer {
-	height: 75px;
-	margin-top: 512px;
-}
-
-.examples, .list {
-	background-color: red;
-	margin: 10px;
-	border: 1px solid black;
-}
-
-.list{
-	float: left;
-	height: 500px;
-	width: 400px;
-}
-
-.examples {
-	float: right;
-	width: 225px;
-	height: 390px;
-}
-
-.search {
-	float: right;
-	margin: 10px;
-}
-
-.playlist {
-	float: right;
-	width: 100px;
-	margin: 50px -110px 10px 10px;
-}
-
-.main {
-	border: 1px solid black;
-	height: 700px;
 }
