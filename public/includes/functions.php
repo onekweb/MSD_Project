@@ -49,7 +49,7 @@ interface Isearch  // Order all the functions
 		}
 		else  // else execute the code bellow
 		{ 
-			echo "Error";
+			echo " ";
 		} 
 		
 		 
@@ -58,14 +58,19 @@ interface Isearch  // Order all the functions
 	 public function listing() { //Function for lsting objects
 	
 		$mysqli = $this->connection;
-		$query ="SELECT artists.name, albums.album FROM artists LEFT JOIN albums ON artists.id=albums.artists_id";
+		/*$query ="SELECT artists.name, albums.album FROM artists LEFT JOIN albums ON artists.id=albums.artists_id";*/
+		$query = "SELECT songs.song as track, artists.name as artist, albums.album as album FROM songs
+					LEFT JOIN songs_artists ON songs_artists.song = songs.id
+					LEFT JOIN artists ON artists.id = songs_artists.artist_name
+					LEFT JOIN songs_albums ON songs_albums.song = songs.id
+					LEFT JOIN albums ON albums.id = songs_albums.song GROUP BY track";
 		$stmt = $mysqli->prepare($query);
 		$stmt->execute();
-		$stmt->bind_result($name, $album);
+		$stmt->bind_result($name, $album, $song);
 		
 		while($stmt->fetch()) 
 		{
-			echo $name. " " .$album. "<br />";
+			echo $name. " " .$album.  " " . $song ."<br />";
 			//session_start();	
 			//header('location:findtrue.php ');	
 			
@@ -114,7 +119,9 @@ interface Isearch  // Order all the functions
 		
 	}
 }
+
 $newSearch = new Search(); // The instance of search´s class
+$newSearch->search();
 $newSearch->listing(); // Printing out search function
 
 ?>
