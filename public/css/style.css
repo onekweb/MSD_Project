@@ -3,18 +3,16 @@
 /* The style sheet is made by Mario, Sylvain & Daniel
  * Blue color: #8684ee */
 body {
-	font-family: 	trebuchet MS,verdana, Geneva, Arial, Helvetica, sans-serif;
-	width: 			auto;
-	height:			auto;
-	font-size:  	14px;
-	color: 			#333;
-	margin: 		0px;
-	padding: 		0px;
-	background:		#8684ee;
-	/*background-image: url("img/hexellence.png"); */
+	font-family: 		trebuchet MS,verdana, Geneva, Arial, Helvetica, sans-serif;
+	width: 				auto;
+	height:				auto;
+	font-size:  		14px;
+	color: 				#333;
+	margin: 			0px;
+	padding: 			0px;
+	background:			#8684ee;
 }
 a{}
-
 a.hover{}
 a img{}
 a img .hover{}
@@ -28,22 +26,23 @@ p{}
 /* TOP*/ 
 #top
 {
-	width:			100%;
-	height: 		70px;
-	margin:			0 auto;
-	padding:		0px;
-	background: 	#000 url('../img/header-bg.png') no-repeat;
-	background-position: 230px 0px;
-	display: 		block;
- 	
+	width:				100%;
+	height: 			70px;
+	margin:				0 auto;
+	padding:			0px;
+	background: 		#000 url('../img/header-bg.png') no-repeat;
+	background-position: center;
+	display: 			block; 	
  }
+
 #loginContainer
 {
-	width: 			100%;
-	height:			100%;
-	position:		absolute;
-	right: 			30px;
+	width: 				100%;
+	height:				100%;
+	position:			absolute;
+	right: 				30px;
 } 
+
 /* WRAPPER*/ 
 #wrapper
 {
@@ -52,48 +51,44 @@ p{}
 	margin:			0 auto;
 	padding:		5px;
 	background: 	#fff;
- 	
+ 	overflow: 		hidden;	
  }
+ 
+ /* search-field*/
 
-header {
-	height: 75px;
+#search-field
+{
+	width: 			100%;
+	height:			100%;
+	margin-right:	auto;	
+	margin-left:	31%;
+	margin-top:		50px;
+	padding:		0;
+	display:		block;	
 }
-
-footer {
-	height: 75px;
-	margin-top: 512px;
+.input-search
+{
+	width:			300px;
+	height:			50px;
+	margin:			0 auto;
+	padding-left:	10px;
+	background:		#000;
+	border:			none;
+	color: white;
 }
-
-.examples, .list {
-	background-color: red;
-	margin: 10px;
-	border: 1px solid black;
-}
-
-.list{
-	float: left;
-	height: 500px;
-	width: 400px;
-}
-
-.examples {
-	float: right;
-	width: 225px;
-	height: 390px;
-}
-
-.search {
-	float: right;
-	margin: 10px;
-}
-
-.playlist {
-	float: right;
-	width: 100px;
-	margin: 50px -110px 10px 10px;
-}
-
-.main {
-	border: 1px solid black;
-	height: 700px;
+.submit-search
+{
+	width:			89px;
+	height: 		52px;
+	background:		#000 url('../img/submit-btn.png') no-repeat;
+	background-position:center;		
+	border:			none;
+	display:		inline;
+	color:			#000;
+	padding:		25px;
+	-webkit-margin-after: -12px;
+    position: 		relative;
+    top: 			9px; 
+    right:			4px;		
+    cursor: 		pointer;
 }

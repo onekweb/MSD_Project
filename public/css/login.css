@@ -8,7 +8,7 @@ a { text-decoration:none }
 /*-------LOGIN STARTS HERE -------*/
 
 /* Login Container (default to float:right) */
-#loginContainer {
+#login-container {
     position:relative;
     float:right;
     font-size:12px;
@@ -36,7 +36,7 @@ a { text-decoration:none }
     text-shadow:1px 1px #fff; 
     padding:7px 29px 9px 10px;
     background:url(../img/loginArrow.png) no-repeat 53px 7px;
-    display:block
+    display:block;
 }
 
 #loginButton:hover {
