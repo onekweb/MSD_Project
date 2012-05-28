@@ -44,7 +44,7 @@
 			<!-- #statistic ends here -->
 			<div id="search-field">
 				<form action="./includes/functions.php" method="post">
-					<input type="text" name="search" class="input-search" placeholder="Search your music here...">
+					<input type="text" name="find" class="input-search" placeholder="Search your music here...">
 					<input type="submit" name ="search" class="submit-search" value=""  >					
 				</form>
 			</div>
