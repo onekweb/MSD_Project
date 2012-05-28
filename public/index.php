@@ -32,7 +32,7 @@
                 </div>
             </div>
 		</div
-            <!-- #login-container ends here -->
+            <!-- #top ends here -->
 		<div id="wrapper">
 			<div id="stastic">
 				<h3>Stastic</h3>
@@ -46,7 +46,7 @@
 				<form action="./includes/functions.php" method="post">
 					<input type="text" name="search" class="input-search" placeholder="Search your music here...">
 					<input type="submit" name ="search" class="submit-search" value=""  >					
-			</form>
+				</form>
 			</div>
 			<!-- #search-field ends here-->
 			<div id="add-playlist-containder">         
@@ -80,7 +80,7 @@
 	                    </fieldset>
                     </form>
                 </div>
-			<!--  #playlist-container ends here-->
+			<!--  #add-laylist-container ends here-->
 			<div id="playlist-containder">
 					<table id="playlist-table">
 						<tbody>
@@ -115,6 +115,7 @@
 						</tbody>
 					</table>
 			</div>	
+			<!--  #playlist-containder ends here-->
 		</div>
 			<!--  #wrapper ends here -->
 		
