@@ -12,8 +12,8 @@ body {
 	padding: 			0px;
 	background:			#8684ee;
 }
-a{}
-a.hover{}
+a{color: #8684ee; text-decoration: none;}
+.hover{ color: #333; text-decoration: underline;}
 a img{}
 a img .hover{}
 h1{}
@@ -132,6 +132,98 @@ p{}
     cursor: 		pointer;
 }
 
+/* ADDPLAYLIST*/
+#add-playlist-containder
+{
+	width: 			285px;
+	height:			auto;
+	float:			left;
+	margin:			10px 0px 10px 10px;
+	padding:		0px;
+	display:		block;
+	color:			#fff;
+	background: 	#000;
+	overflow: 		hidden;
+}
+#add-playlist-containder h3
+{
+	width:			300px;
+	height:			20px;
+	background:		#8684ee;	
+	padding:		0px 0px 0px 10px;
+	margin-top:		0px;
+}
+.addplay-list-fieldset
+{
+	border: 		none;
+}
+#add-song, #add-artist, #add-album, #add-genre
+{
+
+}
+#add-song
+{
+	margin-left:		20px;
+}
+#add-artist
+{
+	margin-left:		15px;
+}
+#add-album
+{
+	margin-left:		12px;
+}
+#add-genre
+{
+	margin-left:		15px;
+}
+#add-submit
+{
+	width:				auto;
+	height:				30px;
+	color:				#fff;
+	margin-left:		54px;
+	background:			#8684ee;
+	border:				none;
+	cursor: 			pointer;
+}
+#share
+{
+	margin-left:		53px;
+}
+
+/* PLAYLIST*/
+#playlist-containder
+{
+	width: 			255px;
+	height:			auto;
+	float:			right;
+	margin:			10px 0px 10px 10px;
+	padding:		0px;
+	display:		block;
+	color:			#fff;
+	background: 	#000;
+	overflow: 		hidden;
+}
+#playlist-containder h3
+{
+	width:			300px;
+	height:			20px;
+	background:		#8684ee;	
+	padding:		0px 0px 0px 10px;
+	margin-top:		0px;
+	margin-right:	10px;
+}
+
+#playlist-table
+{
+	
+}
+.playlist
+{
+	border:	1px solid #999;	
+	width:			100px;
+}
 /* FOOTER*/
 #footer
 {

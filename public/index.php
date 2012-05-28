@@ -39,9 +39,9 @@
 				<p class="statistic-text">Songs:<span class="stastic-number-songs">0</span></p>				
 				<p class="statistic-text">Artists:<span class="stastic-number-artists">0</span></p>
 				<p class="statistic-text">Albums:<span class="stastic-number-albums">0</span></p>				
-				<p class="statistic-text">Genres:<span class="stastic-number-genres">0</span></p>
-				
+				<p class="statistic-text">Genres:<span class="stastic-number-genres">0</span></p>		
 			</div>
+			<!-- #statistic ends here -->
 			<div id="search-field">
 				<form action="./includes/functions.php" method="post">
 					<input type="text" name="search" class="input-search" placeholder="Search your music here...">
@@ -49,52 +49,71 @@
 			</form>
 			</div>
 			<!-- #search-field ends here-->
-			<div id="playlist-container">
-                <div style="clear:both"></div>
-                <div id="playlistnBox">                
-                    <form id="playlistForm">
-                        <fieldset id="add-playlist-body">
-                        	
-								<h3>Add playlist</h3>
-                            <fieldset>
-                                <label for="song">Song</label>
-                                <input type="text" name="song" id="song" />
-                            </fieldset>
-                            <fieldset>
-                                <label for="artist">Artist</label>
-                                <input type="text" name="artist" id="artist" />
-                            </fieldset>
-                            <fieldset>
-                                <label for="artist">Album</label>
-                                <input type="text" name="album" id="album" />
-                            </fieldset>
-                            <fieldset>
-                                <label for="artist">Genre</label>
-                                <select id="genre">
-								  <option>Gospel</option>
-								  <option>Pop</option>
-								  <option>Rock</option>
-								</select>
-                            </fieldset>
-                            <input type="submit" id="submit" name="registre-submit"value="Add playlist" />
-                            <label for="checkbox"><input type="checkbox" id="share" />Share with other users</label>
+			<div id="add-playlist-containder">         
+                    <form  action="#" method="post">
+						<h3>Add playlist</h3>
+						<fieldset class="addplay-list-fieldset">
+	                        <label for="song">Song</label>
+	                        <input type="text" name="song" id="add-song"  />
                         </fieldset>
+                        <fieldset class="addplay-list-fieldset">
+	                        <label for="artist">Artist</label>
+	                        <input type="text" name="artist" id="add-artist" />
+                        </fieldset>
+                        <fieldset class="addplay-list-fieldset">   
+	                        <label for="artist">Album</label>
+	                        <input type="text" name="album" id="add-album" />
+	                    </fieldset>
+	                  	<fieldset class="addplay-list-fieldset">     	
+                        <label for="artist">Genre</label>
+                        <select id="add-genre">
+						  <option>Gospel</option>
+						  <option>Pop</option>
+						  <option>Rock</option>
+						</select>
+						</fieldset>
+						<fieldset class="addplay-list-fieldset">
+	                    <input type="submit" id="add-submit" name="registre-submit"value="Add playlist" />
+	                   </fieldset>
+	                   <fieldset class="addplay-list-fieldset">
+	                    <label for="checkbox"><input type="checkbox" id="share" />Share with other users</label>
+	                    </fieldset>
                     </form>
                 </div>
-			</div>
 			<!--  #playlist-container ends here-->
-			<div id="addplay-list-body">
-				<fieldset id="play-list-body">
-					<table border="1" id="addplay-table">
+			<div id="playlist-containder">
+					<table id="playlist-table">
 						<tbody>
 							<tr>
 								<h3>Playlists</h3>
-								<th>Songs</th><th>Artists</th><th>Albums</th><th>Genre</th>
+								<th class="playlist">Songs</th><th class="playlist">Artists</th><th class="playlist">Albums</th><th class="playlist">Genre</th>
+							</tr>
+							<tr>
+								<td>#</td>
+								<td>#</td>
+								<td>#</td>
+								<td>#</td>
+							</tr>
+							<tr>
+								<td>#</td>
+								<td>#</td>
+								<td>#</td>
+								<td>#</td>
+							</tr>
+							<tr>
+								<td>#</td>
+								<td>#</td>
+								<td>#</td>
+								<td>#</td>
+							</tr>
+							<tr>
+								<td>#</td>
+								<td>#</td>
+								<td>#</td>
+								<td>#</td>
 							</tr>
 						</tbody>
 					</table>
-				</fieldset>
-				
 			</div>	
 		</div>
 			<!--  #wrapper ends here -->

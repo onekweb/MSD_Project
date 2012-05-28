@@ -17,5 +17,17 @@ $(function() {
             button.removeClass('active');
             box.hide();
         }
-    }); 
+    });
+    
+		$(".input-search").each( function(){
+		$(this).val( $(this).attr("title") );
+	});
+	$(".input-search").focus( function(){
+		if( $(this).val() == $(this).attr("title") )
+			$(this).val("");
+	});
+	$(".input-search").blur( function(){
+		if( $(this).val() == "" || $(this).val() == $(this).attr("title") )
+			$(this).val( $(this).attr("title") );
+	}) 
 });
