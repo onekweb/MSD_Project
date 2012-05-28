@@ -50,7 +50,7 @@
 			</div>
 			<!-- #search-field ends here-->
 			<div id="add-playlist-containder">         
-                    <form  action="#" method="post">
+                    <form  action="./includes/functions.php" method="post">
 						<h3>Add playlist</h3>
 						<fieldset class="addplay-list-fieldset">
 	                        <label for="song">Song</label>
@@ -66,7 +66,7 @@
 	                    </fieldset>
 	                  	<fieldset class="addplay-list-fieldset">     	
                         <label for="artist">Genre</label>
-                        <select id="add-genre">
+                        <select id="add-genre" name="genre">
 						  <option>Gospel</option>
 						  <option>Pop</option>
 						  <option>Rock</option>
@@ -121,7 +121,7 @@
 		
 		<div id="footer">
 			<p>
-			&copy;2012| D.M.C | Mario Daniel & Daniel | Email: <a href="mario.onekanda@hotmail.com">Info@msd.se</a> | Adress: Madison square 7, 188 20 New york | Facebook: <href="#">Facebook.com/MSD</a> 
+			&copy;2012| D.M.C | Mario Sylvain & Daniel | Email: <a href="mario.onekanda@hotmail.com">Info@msd.se</a> | Adress: Madison square 7, 188 20 New york | Facebook: <href="#">Facebook.com/MSD</a> 
 			</p>
 		</div>
 		<!--  #footer ends here -->
