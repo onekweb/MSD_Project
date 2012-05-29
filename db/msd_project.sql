@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Värd: localhost
--- Skapad: 28 maj 2012 kl 08:42
+-- Skapad: 29 maj 2012 kl 12:15
 -- Serverversion: 5.5.16
 -- PHP-version: 5.3.8
 
@@ -92,6 +92,7 @@ CREATE TABLE IF NOT EXISTS `artists` (
   `name` varchar(50) NOT NULL,
   `genres_id` int(11) NOT NULL,
   `albums_id` int(11) NOT NULL,
+  `songs_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=31 ;
 
@@ -99,37 +100,37 @@ CREATE TABLE IF NOT EXISTS `artists` (
 -- Dumpning av Data i tabell `artists`
 --
 
-INSERT INTO `artists` (`id`, `name`, `genres_id`, `albums_id`) VALUES
-(1, 'Michael', 1, 1),
-(2, 'Michael', 1, 2),
-(3, 'Michael', 1, 3),
-(4, 'Michael', 1, 4),
-(5, 'Michael', 1, 5),
-(6, 'Michael', 1, 6),
-(7, 'Michael', 1, 7),
-(8, 'Michael', 1, 8),
-(9, 'Michael', 1, 9),
-(10, 'Michael', 1, 10),
-(11, 'Michael', 1, 11),
-(12, 'Michael', 1, 12),
-(13, 'Jennifer', 2, 13),
-(14, 'Jennifer', 2, 14),
-(15, 'Jennifer', 2, 15),
-(16, 'Jennifer', 2, 16),
-(17, 'Jennifer', 2, 17),
-(18, 'Jennifer', 2, 18),
-(19, 'Jennifer', 2, 19),
-(20, 'Jennifer', 2, 20),
-(21, 'Jennifer', 2, 21),
-(22, 'Jennifer', 2, 22),
-(23, 'Jennifer', 2, 23),
-(24, 'Jennifer', 2, 24),
-(25, 'Clovis', 3, 25),
-(26, 'Clovis', 3, 26),
-(27, 'Clovis', 3, 27),
-(28, 'Clovis', 3, 28),
-(29, 'Clovis', 3, 29),
-(30, 'Clovis', 3, 30);
+INSERT INTO `artists` (`id`, `name`, `genres_id`, `albums_id`, `songs_id`) VALUES
+(1, 'Michael', 1, 1, 1),
+(2, 'Michael', 1, 1, 2),
+(3, 'Michael', 1, 1, 3),
+(4, 'Michael', 1, 2, 4),
+(5, 'Michael', 1, 2, 5),
+(6, 'Michael', 1, 2, 6),
+(7, 'Michael', 1, 3, 7),
+(8, 'Michael', 1, 3, 8),
+(9, 'Michael', 1, 3, 9),
+(10, 'Michael', 1, 4, 10),
+(11, 'Michael', 1, 4, 11),
+(12, 'Michael', 1, 4, 12),
+(13, 'Jennifer', 2, 5, 13),
+(14, 'Jennifer', 2, 5, 14),
+(15, 'Jennifer', 2, 5, 15),
+(16, 'Jennifer', 2, 6, 16),
+(17, 'Jennifer', 2, 6, 17),
+(18, 'Jennifer', 2, 6, 18),
+(19, 'Jennifer', 2, 7, 19),
+(20, 'Jennifer', 2, 7, 20),
+(21, 'Jennifer', 2, 7, 21),
+(22, 'Jennifer', 2, 8, 22),
+(23, 'Jennifer', 2, 8, 23),
+(24, 'Jennifer', 2, 8, 24),
+(25, 'Clovis', 3, 9, 25),
+(26, 'Clovis', 3, 9, 26),
+(27, 'Clovis', 3, 9, 27),
+(28, 'Clovis', 3, 10, 28),
+(29, 'Clovis', 3, 10, 29),
+(30, 'Clovis', 3, 10, 30);
 
 -- --------------------------------------------------------
 
@@ -161,7 +162,8 @@ CREATE TABLE IF NOT EXISTS `contains_songs_playlists` (
 
 CREATE TABLE IF NOT EXISTS `genres` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL,
+  `genre` varchar(50) NOT NULL,
+  `artists_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
@@ -169,10 +171,10 @@ CREATE TABLE IF NOT EXISTS `genres` (
 -- Dumpning av Data i tabell `genres`
 --
 
-INSERT INTO `genres` (`id`, `name`) VALUES
-(1, 'Pop'),
-(2, 'Gospel'),
-(3, 'Rock');
+INSERT INTO `genres` (`id`, `genre`, `artists_id`) VALUES
+(1, 'Pop', 1),
+(2, 'Gospel', 2),
+(3, 'Rock', 3);
 
 -- --------------------------------------------------------
 
@@ -195,6 +197,8 @@ CREATE TABLE IF NOT EXISTS `playlists` (
 CREATE TABLE IF NOT EXISTS `songs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `song` varchar(50) NOT NULL,
+  `artists_id` int(11) NOT NULL,
+  `albums_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=34 ;
 
@@ -202,39 +206,39 @@ CREATE TABLE IF NOT EXISTS `songs` (
 -- Dumpning av Data i tabell `songs`
 --
 
-INSERT INTO `songs` (`id`, `song`) VALUES
-(1, 'People Make the World Go ''Round'),
-(2, 'My Girl'),
-(3, 'In Our Small Way'),
-(4, 'Remember the Time'),
-(5, '	She Drives Me Wild'),
-(6, 'Who Is It'),
-(7, 'Cry'),
-(8, 'Privacy'),
-(9, 'Butterflies'),
-(10, 'Got to Be There'),
-(11, 'Maria'),
-(12, 'Love Is Here and Now You''re Gone'),
-(13, 'what is love'),
-(14, 'one love'),
-(15, 'take care'),
-(16, 'get right lyrics'),
-(17, 'step into my world'),
-(18, 'still around  lyrics'),
-(19, 'do it well'),
-(20, 'be mine'),
-(21, 'forever'),
-(22, 'sola'),
-(23, 'como ama una mujer'),
-(24, 'amarte es todo'),
-(25, 'Mundo'),
-(26, 'Invincibles'),
-(27, 'Metamorfosis'),
-(28, 'La base'),
-(29, 'La sombra'),
-(30, 'Rescate'),
-(32, 'Leaving you'),
-(33, 'Self -defense');
+INSERT INTO `songs` (`id`, `song`, `artists_id`, `albums_id`) VALUES
+(1, 'People Make the World Go ''Round', 1, 1),
+(2, 'My Girl', 1, 1),
+(3, 'In Our Small Way', 1, 1),
+(4, 'Remember the Time', 1, 2),
+(5, '	She Drives Me Wild', 1, 2),
+(6, 'Who Is It', 1, 2),
+(7, 'Cry', 1, 3),
+(8, 'Privacy', 1, 3),
+(9, 'Butterflies', 1, 3),
+(10, 'Got to Be There', 1, 4),
+(11, 'Maria', 1, 4),
+(12, 'Love Is Here and Now You''re Gone', 1, 4),
+(13, 'what is love', 2, 5),
+(14, 'one love', 2, 5),
+(15, 'take care', 2, 5),
+(16, 'get right lyrics', 2, 6),
+(17, 'step into my world', 2, 6),
+(18, 'still around  lyrics', 2, 6),
+(19, 'do it well', 2, 7),
+(20, 'be mine', 2, 7),
+(21, 'forever', 2, 7),
+(22, 'sola', 2, 8),
+(23, 'como ama una mujer', 2, 8),
+(24, 'amarte es todo', 2, 8),
+(25, 'Mundo', 2, 9),
+(26, 'Invincibles', 3, 9),
+(27, 'Metamorfosis', 3, 9),
+(28, 'La base', 3, 10),
+(29, 'La sombra', 3, 10),
+(30, 'Rescate', 3, 10),
+(32, 'Leaving you', 0, 0),
+(33, 'Self -defense', 0, 0);
 
 -- --------------------------------------------------------
 

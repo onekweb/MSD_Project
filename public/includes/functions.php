@@ -3,7 +3,6 @@ require ('function/allfunctions.php'); // link to all the functions
 require ('connection.php'); //Link to connection
 interface Isearch  // Order all the functions
 {
-    public  function search(); // Function for search
     public function listing(); //Function for lsting objects
     public function connection(); // Function for connection
     public function dexonnection(); // Function for dexonnetion
@@ -15,49 +14,23 @@ interface Isearch  // Order all the functions
     public function showGenres();// Function for showing genres
     public function showSongs(); // Function for showing the shows
     public function showPlayLists(); // Function for showing the playlists
-    
-    
 }
  class Search implements Isearch  // The class for all function
 {
     public $find = NULL; // init the search varibales with null
     
     public function __construct()  // Consctruct the variables
-    {    
+    {   
+	if(isset($_POST['find'])){$this->find = $_POST['find'];} 
      global $connection;
-     $this->pname = $_POST['playlist_name'];
-     //$this->find = $_POST['find'];
-     $this->connection = $connection;
-     $this->connection = $connection;
-    
-    }
-    
-     public function search() // Function that searches everything in the database
-    {    /*
-        if(isset($search)) // If the formular has been send, execute the code bellow
-        {
-            $search = $_POST['search'];
-            $mysqli = $this->connection; //Connections to the server and database 
-            $name = $this->search; 
-            $query ="SELECT * FROM artists WHERE name LIKE '%$this->search%' "; //The querie to select and match the post that´has been send
-            $stmt = $mysqli->prepare($query); //Prepeare the query 
-            //$stmt->bind_param('s', $name);
-            $stmt->execute();  // Executation of the statement
-            $stmt->bind_result($id, $name, $genre); // Bind the result in the table
-            while($stmt->fetch()) // loop and fetch the statement 
-            {
 
-                echo 'The result found: '. $name; // Print the result of the statement
-            }
-        }
-        else  // else execute the code bellow
-        { 
-            echo " ";
-        } 
-         
-        */
-         
-    } 
+     $this->pname = $_POST['playlist_name'];
+     $this->find = $_POST['find'];
+
+     $this->connection = $connection;
+     $this->connection = $connection;
+    }
+
 
      public function listing() { //Function for lsting objects
     
@@ -106,11 +79,51 @@ interface Isearch  // Order all the functions
             echo "<a href='../index.php'>Go back here</a>";
         }
         
+
+     public function listing() //Function for lsting objects
+     { 
+		if(isset($_POST['find']))
+		{
+				$this->find = $_POST['find']; // the post variable
+				if($this->find !== '')//if the variable is not empety, exectued the code bellow
+				{ 
+		            $mysqli = $this->connection;
+		            //$query ="SELECT artists.name, albums.album FROM artists LEFT JOIN albums ON artists.id=albums.artists_id";
+		            $query = "SELECT songs.song as Song, albums.album as Album, artists.name as Artist FROM songs
+		                        LEFT JOIN albums ON songs.id = albums.songs_id
+		                        LEFT JOIN artists ON albums.id = artists.albums_id 
+		                        WHERE song LIKE '%".$this->find."%'"; 
+					$queryartist = NULL;
+		            /*$query = "SELECT songs.song as Song, artists.name as Artist FROM songs
+		                        LEFT JOIN artists on songs.id = artists.songs_id
+		                        WHERE song LIKE '$this->find%'";    */        
+		            $stmt = $mysqli->prepare($query);
+		            $stmt->execute();
+		            $stmt->bind_result($name,$album, $song);
+					echo "<table border='1'>";
+		            echo "<th>Songs</th><th>Albums</th><th>Artists</th>";
+		            while($stmt->fetch())  
+		            {
+		                echo "<tr><td>".$name."</td><td>" .$album."</td><td>".$song."</td></t>	";       
+		             }
+		            echo "</table>";  
+		            if ($name == NULL || $song == NULL) 
+		            {
+		            	
+		                echo"Could not find the artist or the song your searched!<br />";     
+		                echo"Please try again!<br />";            
+		            }
+		           } 
+		          elseif($this->find == '')
+		          {
+		           	 echo"Opps, you have to write something on the searchfield.<br />";     
+		             echo"Please try again!<br />";  
+		          }
+	      
+	      }
+	      
      }
-         
-    
-    }
-    
+   
     public function connection() //Functions for the connection to the server and the database
     {
         
@@ -125,6 +138,7 @@ interface Isearch  // Order all the functions
     {
         
     }
+
     public function createPlaylists()// Function for creating the playlists
     {
         $mysqli = $this->connection;
@@ -133,11 +147,28 @@ interface Isearch  // Order all the functions
 		$stmt = $mysqli->prepare($query);
 		$stmt->execute();
 		while($stmt->fetch()) {
-			echo "Spellist skapad med namnet: ".$this->pname;
+			echo "Spellista skapad med namnet: ".$this->pname;
 		} 
     }
     
     public function addSongPlaylists() {
+		
+		$mysqli = $this->connection;
+		
+		$playlist
+		/*
+		 * SELECT songs.song as Song, albums.album as Album, artists.name as Artist FROM songs
+                         LEFT JOIN albums ON songs.id = albums.songs_id
+                        LEFT JOIN artists ON albums.id = artists.albums_id 
+                        WHERE song LIKE '%$this->find%'"; 
+		 */
+		 "SELECT id FROM playlists WHERE name = ".$playlist." UPDATE contains_songs_playlists";
+		 
+		 
+		$query = "UPDATE contains_songs_playlists 
+					LEFT JOIN playlists ON playlists.id = contains_songs_playlists.playlists_id
+					LEFT JOIN songs ON songs.id = contains_songs_playlists.songs_id
+					WHERE ";
 	}
     
     public function showAartists()// Function for showing the artists
@@ -165,6 +196,5 @@ interface Isearch  // Order all the functions
 
 $newSearch = new Search(); // The instance of search´s class
 $newSearch->createPlaylists();
-$newSearch->search();
 $newSearch->listing(); // Printing out search function
 ?>
