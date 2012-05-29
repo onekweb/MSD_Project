@@ -89,10 +89,12 @@ interface Isearch  // Order all the functions
 				{ 
 		            $mysqli = $this->connection;
 		            //$query ="SELECT artists.name, albums.album FROM artists LEFT JOIN albums ON artists.id=albums.artists_id";
-		            $query = "SELECT songs.song as Song, albums.album as Album, artists.name as Artist FROM songs
+		            $query = 	"SELECT songs.song as Song, albums.album as Album, artists.name as Artist FROM songs
 		                        LEFT JOIN albums ON songs.id = albums.songs_id
 		                        LEFT JOIN artists ON albums.id = artists.albums_id 
-		                        WHERE song LIKE '%".$this->find."%'"; 
+		                        WHERE song LIKE '%".$this->find."%'
+		                        OR album LIKE '%".$this->find."%'
+								OR name LIKE '%".$this->find."%'";
 					$queryartist = NULL;
 		            /*$query = "SELECT songs.song as Song, artists.name as Artist FROM songs
 		                        LEFT JOIN artists on songs.id = artists.songs_id
@@ -104,12 +106,12 @@ interface Isearch  // Order all the functions
 		            echo "<th>Songs</th><th>Albums</th><th>Artists</th>";
 		            while($stmt->fetch())  
 		            {
-		                echo "<tr><td>".$name."</td><td>" .$album."</td><td>".$song."</td></t>	";       
+		                echo "<tr><td>".$name."</td><td>" .$album."</td><td>".$song."</td></t>";       
 		             }
 		            echo "</table>";  
-		            if ($name == NULL || $song == NULL) 
+		            if ($name == NULL || $album == NULL ||$song == NULL) 
 		            {
-		            	
+
 		                echo"Could not find the artist or the song your searched!<br />";     
 		                echo"Please try again!<br />";            
 		            }
@@ -119,7 +121,7 @@ interface Isearch  // Order all the functions
 		           	 echo"Opps, you have to write something on the searchfield.<br />";     
 		             echo"Please try again!<br />";  
 		          }
-	      
+
 	      }
 	      
      }
