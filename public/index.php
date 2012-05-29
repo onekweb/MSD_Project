@@ -43,7 +43,8 @@
 			</div>
 			<!-- #statistic ends here -->
 			<div id="search-field">
-				<form action="./includes/functions.php" method="post">
+				<!--<form action="includes/functions.php" method="post">-->
+					<form action="index.php" method="post">
 					<input type="text" name="find" class="input-search" placeholder="Search your music here...">
 					<input type="submit" name ="search" class="submit-search" value=""  >					
 				</form>
@@ -79,6 +80,9 @@
 	                    <label for="checkbox"><input type="checkbox" id="share" />Share with other users</label>
 	                    </fieldset>
                     </form>
+                </div>
+                <div id="show-result">
+                	<?php include('includes/functions.php')?>
                 </div>
 			<!--  #add-laylist-container ends here-->
 			<div id="playlist-containder">
