@@ -9,6 +9,7 @@ interface Isearch  // Order all the functions
     public function dexonnection(); // Function for dexonnetion
     public function users(); // Function for users login
     public function createPlaylists(); // Function for creating the playlists
+    public function addSongPlaylists(); // Function for adding songs to play list.
     public function showAartists(); // Function for showing the artists
     public function showAlbums(); //Function for showing albums
     public function showGenres();// Function for showing genres
@@ -24,15 +25,16 @@ interface Isearch  // Order all the functions
     public function __construct()  // Consctruct the variables
     {    
      global $connection;
-     $this->find = $_POST['find'];
+     $this->pname = $_POST['playlist_name'];
+     //$this->find = $_POST['find'];
      $this->connection = $connection;
      $this->connection = $connection;
     
     }
     
      public function search() // Function that searches everything in the database
-    {    
-        /*if(isset($search)) // If the formular has been send, execute the code bellow
+    {    /*
+        if(isset($search)) // If the formular has been send, execute the code bellow
         {
             $search = $_POST['search'];
             $mysqli = $this->connection; //Connections to the server and database 
@@ -52,8 +54,8 @@ interface Isearch  // Order all the functions
         { 
             echo " ";
         } 
-         * */
-        
+         
+        */
          
     } 
 
@@ -68,7 +70,7 @@ interface Isearch  // Order all the functions
             $query = "SELECT songs.song as Song, albums.album as Album, artists.name as Artist FROM songs
                          LEFT JOIN albums ON songs.id = albums.songs_id
                         LEFT JOIN artists ON albums.id = artists.albums_id 
-                        WHERE song LIKE '$this->find%'"; 
+                        WHERE song LIKE '%$this->find%'"; 
             /*$query = "SELECT songs.song as Song, artists.name as Artist FROM songs
                         LEFT JOIN artists on songs.id = artists.songs_id
                         WHERE song LIKE '$this->find%'";    */        
@@ -125,8 +127,18 @@ interface Isearch  // Order all the functions
     }
     public function createPlaylists()// Function for creating the playlists
     {
-            
+        $mysqli = $this->connection;
+        
+		$query = "INSERT playlists SET name = '$this->pname'";
+		$stmt = $mysqli->prepare($query);
+		$stmt->execute();
+		while($stmt->fetch()) {
+			echo "Spellist skapad med namnet: ".$this->pname;
+		} 
     }
+    
+    public function addSongPlaylists() {
+	}
     
     public function showAartists()// Function for showing the artists
     {
@@ -152,6 +164,7 @@ interface Isearch  // Order all the functions
 }
 
 $newSearch = new Search(); // The instance of search´s class
+$newSearch->createPlaylists();
 $newSearch->search();
 $newSearch->listing(); // Printing out search function
 ?>
