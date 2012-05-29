@@ -52,27 +52,13 @@
 			<div id="add-playlist-containder">         
                     <form  action="./includes/functions.php" method="post">
 						<h3>Add playlist</h3>
-						<fieldset class="addplay-list-fieldset">
-	                        <label for="song">Song</label>
-	                        <input type="text" name="song" id="add-song"  />
+						<fieldset class="addplaylist-fieldset">
+	                        <label for="song">Playlist name</label>
+	                        <input type="text" name="playlist_name" id="add_playlist"  />
                         </fieldset>
-                        <fieldset class="addplay-list-fieldset">
-	                        <label for="artist">Artist</label>
-	                        <input type="text" name="artist" id="add-artist" />
-                        </fieldset>
-                        <fieldset class="addplay-list-fieldset">   
-	                        <label for="artist">Album</label>
-	                        <input type="text" name="album" id="add-album" />
-	                    </fieldset>
-	                  	<fieldset class="addplay-list-fieldset">     	
-                        <label for="artist">Genre</label>
-                        <select id="add-genre" name="genre">
-						  <option>Gospel</option>
-						  <option>Pop</option>
-						  <option>Rock</option>
-						</select>
+                        
 						</fieldset>
-						<fieldset class="addplay-list-fieldset">
+						<fieldset class="addplaylist-fieldset">
 	                    <input type="submit" id="add-submit" name="registre-submit"value="Add playlist" />
 	                   </fieldset>
 	                   <fieldset class="addplay-list-fieldset">
