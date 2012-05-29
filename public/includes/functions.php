@@ -13,8 +13,6 @@ interface Isearch  // Order all the functions
     public function showGenres();// Function for showing genres
     public function showSongs(); // Function for showing the shows
     public function showPlayLists(); // Function for showing the playlists
-    
-    
 }
  class Search implements Isearch  // The class for all function
 {
