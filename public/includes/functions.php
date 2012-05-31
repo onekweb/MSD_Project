@@ -1,5 +1,4 @@
 <?php // search.php
-require ('function/allfunctions.php'); // link to all the functions
 require ('connection.php'); //Link to connection
 interface Isearch  // Order all the functions
 {
@@ -21,6 +20,18 @@ interface Isearch  // Order all the functions
     public function __construct()  // Consctruct the variables
     {   
 	if(isset($_POST['find'])){$this->find = $_POST['find'];} 
+	
+	if(isset($_POST['playlist']))
+	{
+		$this->playlistName = $_POST['playlist'];
+	}
+	
+	if(isset($_POST['songId']))
+	{
+		$this->songId = $_POST['songId'];
+	} 
+	
+	
      global $connection;
      $this->connection = $connection;
      $this->connection = $connection;
@@ -42,7 +53,7 @@ interface Isearch  // Order all the functions
 		                        OR album LIKE '%".$this->find."%'
 								OR artist LIKE '%".$this->find."%'";
 								
-					$queryPlaylistNo = "SELECT COUNT(*) FROM playlists";
+
 					
 					$queryPlaylistName = "SELECT name FROM playlists";
 					$queryartist = NULL;					
@@ -74,19 +85,19 @@ interface Isearch  // Order all the functions
 						$playlists[]=$playlistNames;
 					}
 					
-		            
 					echo "<table border='1'>";
-		            echo "<th>Songs</th><th>Albums</th><th>Artists</th>";
-		            foreach($songs as $song){
-		                echo "<tr><td><input type='hidden' value=".$song['id']." name='songId' />".$song['song']."</td><td>" .$song['album']."</td><td>".$song['artist']."</td></tr>
-		                <form action='./includes/functions.php' method='post'>
-		                	<input type='submit' name='songId' value='Lägg till i spellista'/>
-		                	<select id='add-genre' name='playlists'>";
+		            echo "<th>Song Id</th><th>Songs</th><th>Albums</th><th>Artists</th>";
+					echo "<form action='./includes/functions.php' method='post'>
+							<input type='text' name='songId' placeholder='Song Id' />
+							<select name='playlists'>";
 								foreach($playlists as $playlistName){ 
 									 echo "<option>".$playlistName."</option>";
 								 }
-							echo "</select>
-		                </form>";
+					echo "	</select>
+							<input type='submit' name='playlist' value='Add song' />
+						  </form>";
+		            foreach($songs as $song){
+		                echo "<tr><td>".$song['id']."</td><td>".$song['song']."</td><td>" .$song['album']."</td><td>".$song['artist']."</td></tr>";
 						
 						// Kvar att göra, en for loop som skriver ut all spellistor som finns.
 						
@@ -99,6 +110,8 @@ interface Isearch  // Order all the functions
 		           	 echo"Opps, you have to write something on the searchfield.<br />";     
 		             echo"Please try again!<br />";  
 		          }
+				  
+				  
 
 	      }
      }
@@ -120,18 +133,24 @@ interface Isearch  // Order all the functions
     public function createPlaylists()// Function for creating the playlists
     {
     	$mysqli = $this->connection;
-    	
-    	$playlistName = $_POST['playlist'];
-    	$songName = $_POST['song'];
-		
-		$query = "SELECT id FROM playlists WHERE name='$playlistName' AND id FROM songs WHERE song = '$songName'";
-		$stmt->prepare($query);
-		$stmt->bind_result($pId, $sId);
-		$stmt->execute();
-		$stmt->fetch();
-		
-		$queryAdd = "INSERT INTO contains_songs_playlists(playlists_id, songs_id) VALUE($pId, $sId)";
-		
+    	if(isset($_POST['playlist'])) {
+	    	$this->playlistName;
+	    	$this->songId;
+			
+			$queryPlaylistId = "SELECT id FROM playlists WHERE name = '$this->playlistName'";
+			
+			$stmt1 = $mysqli->prepare($queryPlaylistId);
+			$stmt1->bind_result($pId);
+			$stmt1->execute();
+			$stmt1->fetch();
+			$queryAdd = "INSERT INTO contains_songs_playlists(playlists_id, songs_id) VALUE(?, ?)";
+			$stmt1->close();
+	
+			$stmt2 = $mysqli->prepare($queryAdd);
+			$stmt2->bind_param("ii", $pId, $this->songId);
+			$stmt2->execute();
+			echo "<br />Hello World";
+		}
     }
     
     public function showAartists()// Function for showing the artists
@@ -159,4 +178,5 @@ interface Isearch  // Order all the functions
 
 $newSearch = new Search(); // The instance of search´s class
 $newSearch->listing(); // Printing out search function
+$newSearch->createPlaylists();
 ?>
