@@ -23,7 +23,7 @@
                 
 			<!--  #show-result ends here-->
 			<div id="playlist-containder">
-				  <?php require('includes/addplaylist-container.php')?>
+				  <?php require('includes/playlist-container.php')?>
 			</div>	
 			<!--  #playlist-containder ends here-->
 		</div>
