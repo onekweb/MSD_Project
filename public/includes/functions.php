@@ -34,33 +34,65 @@ interface Isearch  // Order all the functions
 				if($this->find !== '')//if the variable is not empety, exectued the code bellow
 				{ 
 		            $mysqli = $this->connection;
-		            //$query ="SELECT artists.name, albums.album FROM artists LEFT JOIN albums ON artists.id=albums.artists_id";
-		            $query = 	"SELECT songs.song as Song, albums.album as Album, artists.name as Artist FROM songs
-		                        LEFT JOIN albums ON songs.id = albums.songs_id
-		                        LEFT JOIN artists ON albums.id = artists.albums_id 
+
+		            $query = "SELECT songs.song as Song, songs.id , albums.album as Album, artists.artist as Artist FROM songs
+		                        LEFT JOIN albums ON albums.id = songs.albums_id
+                                LEFT JOIN artists ON artists.id = albums.artists_id
 		                        WHERE song LIKE '%".$this->find."%'
 		                        OR album LIKE '%".$this->find."%'
-								OR name LIKE '%".$this->find."%'";
-					$queryartist = NULL;
-		            /*$query = "SELECT songs.song as Song, artists.name as Artist FROM songs
-		                        LEFT JOIN artists on songs.id = artists.songs_id
-		                        WHERE song LIKE '$this->find%'";    */        
-		            $stmt = $mysqli->prepare($query);
-		            $stmt->execute();
-		            $stmt->bind_result($name,$album, $song);
+								OR artist LIKE '%".$this->find."%'";
+								
+					$queryPlaylistNo = "SELECT COUNT(*) FROM playlists";
+					
+					$queryPlaylistName = "SELECT name FROM playlists";
+					$queryartist = NULL;					
+		            $stmt1 = $mysqli->prepare($query);
+		            $stmt1->bind_result($song, $id, $album, $artist);
+		            $stmt1->execute();
+					$songs = array();
+					$i = 0;
+					while($stmt1->fetch()){
+			            if ($artist == NULL || $album == NULL ||$song == NULL) 
+			            {
+	
+			                echo"Could not find the artist or the song your searched!<br />";     
+			                echo"Please try again!<br />";            
+			            }
+						$songs[$i] = array();
+						$songs[$i]['song'] = $song;
+						$songs[$i]['artist'] = $artist;
+						$songs[$i]['album'] = $album;
+						$songs[$i]['id'] = $id;
+						$i++;
+					}
+					$stmt1->close();
+					$stmt2 = $mysqli->prepare($queryPlaylistName);
+					$stmt2->bind_result($playlistNames);
+					$stmt2->execute();
+					$playlists = array();
+					while($stmt2->fetch()){ 
+						$playlists[]=$playlistNames;
+					}
+					
+		            
 					echo "<table border='1'>";
 		            echo "<th>Songs</th><th>Albums</th><th>Artists</th>";
-		            while($stmt->fetch())  
-		            {
-		                echo "<tr><td>".$name."</td><td>" .$album."</td><td>".$song."</td></t>";       
-		             }
+		            foreach($songs as $song){
+		                echo "<tr><td><input type='hidden' value=".$song['id']." name='songId' />".$song['song']."</td><td>" .$song['album']."</td><td>".$song['artist']."</td></tr>
+		                <form action='./includes/functions.php' method='post'>
+		                	<input type='submit' name='songId' value='Lägg till i spellista'/>
+		                	<select id='add-genre' name='playlists'>";
+								foreach($playlists as $playlistName){ 
+									 echo "<option>".$playlistName."</option>";
+								 }
+							echo "</select>
+		                </form>";
+						
+						// Kvar att göra, en for loop som skriver ut all spellistor som finns.
+						
+					}
 		            echo "</table>";  
-		            if ($name == NULL || $album == NULL ||$song == NULL) 
-		            {
 
-		                echo"Could not find the artist or the song your searched!<br />";     
-		                echo"Please try again!<br />";            
-		            }
 		           } 
 		          elseif($this->find == '')
 		          {
@@ -87,7 +119,19 @@ interface Isearch  // Order all the functions
     }
     public function createPlaylists()// Function for creating the playlists
     {
-            
+    	$mysqli = $this->connection;
+    	
+    	$playlistName = $_POST['playlist'];
+    	$songName = $_POST['song'];
+		
+		$query = "SELECT id FROM playlists WHERE name='$playlistName' AND id FROM songs WHERE song = '$songName'";
+		$stmt->prepare($query);
+		$stmt->bind_result($pId, $sId);
+		$stmt->execute();
+		$stmt->fetch();
+		
+		$queryAdd = "INSERT INTO contains_songs_playlists(playlists_id, songs_id) VALUE($pId, $sId)";
+		
     }
     
     public function showAartists()// Function for showing the artists

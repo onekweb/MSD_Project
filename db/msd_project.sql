@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Värd: localhost
--- Skapad: 30 maj 2012 kl 15:42
+-- Skapad: 31 maj 2012 kl 07:37
 -- Serverversion: 5.5.16
 -- PHP-version: 5.3.8
 
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `albums` (
   `album` varchar(50) NOT NULL,
   `artists_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=31 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumpning av Data i tabell `albums`
@@ -68,7 +68,7 @@ INSERT INTO `albums` (`id`, `album`, `artists_id`) VALUES
 
 CREATE TABLE IF NOT EXISTS `artists` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL,
+  `artist` varchar(50) NOT NULL,
   `genres_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
@@ -77,57 +77,10 @@ CREATE TABLE IF NOT EXISTS `artists` (
 -- Dumpning av Data i tabell `artists`
 --
 
-INSERT INTO `artists` (`id`, `name`, `genres_id`) VALUES
+INSERT INTO `artists` (`id`, `artist`, `genres_id`) VALUES
 (1, 'michael jackson', 1),
 (2, 'jennifer lopez', 1),
 (3, 'clovis', 2);
-
--- --------------------------------------------------------
-
---
--- Tabellstruktur `contains_albums_songs`
---
-
-CREATE TABLE IF NOT EXISTS `contains_albums_songs` (
-  `albums_id` int(11) NOT NULL,
-  `songs_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumpning av Data i tabell `contains_albums_songs`
---
-
-INSERT INTO `contains_albums_songs` (`albums_id`, `songs_id`) VALUES
-(1, 1),
-(1, 2),
-(1, 3),
-(2, 4),
-(2, 5),
-(2, 6),
-(3, 7),
-(3, 8),
-(3, 9),
-(4, 10),
-(4, 11),
-(4, 12),
-(5, 13),
-(5, 14),
-(5, 15),
-(6, 16),
-(6, 17),
-(6, 18),
-(7, 19),
-(7, 20),
-(7, 21),
-(8, 22),
-(8, 23),
-(8, 24),
-(9, 25),
-(9, 26),
-(9, 27),
-(10, 28),
-(10, 29),
-(10, 30);
 
 -- --------------------------------------------------------
 
@@ -190,6 +143,7 @@ INSERT INTO `playlists` (`id`, `name`) VALUES
 CREATE TABLE IF NOT EXISTS `songs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `song` varchar(50) NOT NULL,
+  `albums_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=34 ;
 
@@ -197,39 +151,39 @@ CREATE TABLE IF NOT EXISTS `songs` (
 -- Dumpning av Data i tabell `songs`
 --
 
-INSERT INTO `songs` (`id`, `song`) VALUES
-(1, 'People Make the World Go ''Round'),
-(2, 'My Girl'),
-(3, 'In Our Small Way'),
-(4, 'Remember the Time'),
-(5, '	She Drives Me Wild'),
-(6, 'Who Is It'),
-(7, 'Cry'),
-(8, 'Privacy'),
-(9, 'Butterflies'),
-(10, 'Got to Be There'),
-(11, 'Maria'),
-(12, 'Love Is Here and Now You''re Gone'),
-(13, 'what is love'),
-(14, 'one love'),
-(15, 'take care'),
-(16, 'get right lyrics'),
-(17, 'step into my world'),
-(18, 'still around  lyrics'),
-(19, 'do it well'),
-(20, 'be mine'),
-(21, 'forever'),
-(22, 'sola'),
-(23, 'como ama una mujer'),
-(24, 'amarte es todo'),
-(25, 'Mundo'),
-(26, 'Invincibles'),
-(27, 'Metamorfosis'),
-(28, 'La base'),
-(29, 'La sombra'),
-(30, 'Rescate'),
-(32, 'Leaving you'),
-(33, 'Self -defense');
+INSERT INTO `songs` (`id`, `song`, `albums_id`) VALUES
+(1, 'People Make the World Go ''Round', 1),
+(2, 'My Girl', 1),
+(3, 'In Our Small Way', 1),
+(4, 'Remember the Time', 2),
+(5, 'She Drives Me Wild', 2),
+(6, 'Who Is It', 2),
+(7, 'Cry', 3),
+(8, 'Privacy', 3),
+(9, 'Butterflies', 3),
+(10, 'Got to Be There', 4),
+(11, 'Maria', 4),
+(12, 'Love Is Here and Now You''re Gone', 4),
+(13, 'what is love', 5),
+(14, 'one love', 5),
+(15, 'take care', 5),
+(16, 'get right lyrics', 6),
+(17, 'step into my world', 6),
+(18, 'still around  lyrics', 6),
+(19, 'do it well', 7),
+(20, 'be mine', 7),
+(21, 'forever', 7),
+(22, 'sola', 8),
+(23, 'como ama una mujer', 8),
+(24, 'amarte es todo', 8),
+(25, 'Mundo', 9),
+(26, 'Invincibles', 9),
+(27, 'Metamorfosis', 9),
+(28, 'La base', 10),
+(29, 'La sombra', 10),
+(30, 'Rescate', 10),
+(32, 'Leaving you', 0),
+(33, 'Self -defense', 0);
 
 -- --------------------------------------------------------
 
