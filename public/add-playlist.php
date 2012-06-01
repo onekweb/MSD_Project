@@ -10,15 +10,10 @@
 				<?php include('includes/statistic.php');?>	
 			</div>
 			<!-- #statistic ends here -->
-			<div id="search-field">
-				<?php include('includes/searchfield.php');?>	
-			</div>
-			<!-- #search-field ends here-->
-                <div id="show-result">
-                <?php require('includes/functions.php')?>
+			<div id="add-playlist-containder">         
+				<?php require('includes/addplaylist-container.php')?>
                 </div>
-                
-			<!--  #show-result ends here-->
+            <!-- #add-playlist-containder ends here-->   
 		</div>
 			<!--  #wrapper ends here -->
 
