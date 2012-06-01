@@ -95,28 +95,43 @@ interface Isearch  // Order all the functions
 			}
 			
 			echo "<table id='result-table'>";
-			echo "	<th id='result-th'>Song Id</th>
+			echo "	<th id='result-th'>Add to playlist</th>
 					<th id='result-th'>Songs</th>
 					<th id='result-th'>Albums</th>
 					<th id='result-th'>Artists</th>
 					<th id='result-th'>Genre</th>";
 					
 			echo "<form action='./includes/functions.php' method='post'>
-			<input type='text' name='songId' placeholder='Song Id' />
+					<b>Active playlist:</b> <br />
 			<select name='playlistName'>";
 			foreach($playlists as $playlistName){
 				echo "<option>".$playlistName."</option>";
 			}
-			echo " </select>
-			<input type='submit' name='add_songPlaylist' value='Add song' />
-			</form>";
+			echo " </select>";
 			foreach($songs as $song){
-				echo "<tr><td>".$song['id']."</td><td>".$song['song']."</td><td>" .$song['album']."</td><td>".$song['artist']."</td><td>".$song['genre']."</tr>";
+				echo "	<tr>
+							<td class='addSong'>
+								<input type='submit' value='+' name='add_songPlaylist' />
+								<input type='hidden' value='".$song['id']."' name='songId' />
+							</td>
+							<td>
+								".$song['song']."
+							</td>
+							<td>
+								" .$song['album']."
+							</td>
+							<td>
+								".$song['artist']."
+							</td>
+							<td>
+								".$song['genre']."
+							</td>
+						</tr>";
 			
 			// Kvar att göra, en for loop som skriver ut all spellistor som finns.
 			
 			}
-			echo "</table>";
+			echo "</form></table>";
 			
 			}
 			elseif($this->find == '')
@@ -203,6 +218,8 @@ interface Isearch  // Order all the functions
     }
     public function showPlayLists()// Function for showing the playlists
     {
+		
+		
         
     }
 }
