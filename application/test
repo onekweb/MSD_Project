@@ -1,0 +1,18 @@
+echo "<table id='result-table'>";
+		            echo "<th id='result-th'>Song Id</th><th id='result-th'>Songs</th><th id='result-th'>Albums</th><th id='result-th'>Artists</th><th id='result-th'>Genre</th>";
+					echo "<form action='./includes/functions.php' method='post'>
+							<input type='text' name='songId' placeholder='Song Id' />
+							<select name='playlists'>";
+								foreach($playlists as $playlistName){ 
+									 echo "<option>".$playlistName."</option>";
+								 }
+					echo "	</select>
+							<input type='submit' name='playlist' value='Add song' />
+						  </form>";
+		            foreach($songs as $song){
+		                echo "<tr id='result-tr'><td>".$song['id']."</td><td>".$song['song']."</td><td>" .$song['album']."</td><td>".$song['artist']."</td><td>".$song['genre']."</tr>";
+						
+						// Kvar att göra, en for loop som skriver ut all spellistor som finns.
+						
+					}
+		            echo "</table>";  
