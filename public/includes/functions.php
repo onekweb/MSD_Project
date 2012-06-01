@@ -1,4 +1,4 @@
-<?php // search.php
+<?php // search.php+
 require ('connection.php'); //Link to connection
 interface Isearch  // Order all the functions
 {
@@ -51,24 +51,26 @@ interface Isearch  // Order all the functions
 				{ 
 		            $mysqli = $this->connection;
 
-		            $query = "SELECT songs.song as Song, songs.id , albums.album as Album, artists.artist as Artist FROM songs
+		    $query = "SELECT songs.song as Song, songs.id , albums.album as Album, artists.artist as Artist, genres.genre as Genre FROM songs
 		                        LEFT JOIN albums ON albums.id = songs.albums_id
                                 LEFT JOIN artists ON artists.id = albums.artists_id
+                                LEFT JOIN genres ON genres.id = artists.genres_id
 		                        WHERE song LIKE '%".$this->find."%'
 		                        OR album LIKE '%".$this->find."%'
-								OR artist LIKE '%".$this->find."%'";
+								OR artist LIKE '%".$this->find."%'
+								OR genre LIKE '%".$this->find."%'";
 								
 
 					
 					$queryPlaylistName = "SELECT name FROM playlists";
 					$queryartist = NULL;					
 		            $stmt1 = $mysqli->prepare($query);
-		            $stmt1->bind_result($song, $id, $album, $artist);
+		            $stmt1->bind_result($song, $id, $album, $artist, $genre);
 		            $stmt1->execute();
 					$songs = array();
 					$i = 0;
 					while($stmt1->fetch()){
-			            if ($artist == NULL || $album == NULL ||$song == NULL) 
+			            if ($artist == NULL || $album == NULL ||$song == NULL ||$genre == NULL) 
 			            {
 	
 			                echo"Could not find the artist or the song your searched!<br />";     
@@ -79,6 +81,7 @@ interface Isearch  // Order all the functions
 						$songs[$i]['artist'] = $artist;
 						$songs[$i]['album'] = $album;
 						$songs[$i]['id'] = $id;
+						$songs[$i]['genre'] = $genre;
 						$i++;
 					}
 					$stmt1->close();
@@ -90,8 +93,8 @@ interface Isearch  // Order all the functions
 						$playlists[]=$playlistNames;
 					}
 					
-					echo "<table border='1'>";
-		            echo "<th>Song Id</th><th>Songs</th><th>Albums</th><th>Artists</th>";
+					echo "<table id='result-table'>";
+		            echo "<th id='result-th'>Song Id</th><th id='result-th'>Songs</th><th id='result-th'>Albums</th><th id='result-th'>Artists</th><th id='result-th'>Genre</th>";
 					echo "<form action='./includes/functions.php' method='post'>
 							<input type='text' name='songId' placeholder='Song Id' />
 							<select name='playlists'>";
@@ -102,7 +105,7 @@ interface Isearch  // Order all the functions
 							<input type='submit' name='playlist' value='Add song' />
 						  </form>";
 		            foreach($songs as $song){
-		                echo "<tr><td>".$song['id']."</td><td>".$song['song']."</td><td>" .$song['album']."</td><td>".$song['artist']."</td></tr>";
+		                echo "<tr id='result-tr'><td>".$song['id']."</td><td>".$song['song']."</td><td>" .$song['album']."</td><td>".$song['artist']."</td><td>".$song['genre']."</tr>";
 						
 						// Kvar att göra, en for loop som skriver ut all spellistor som finns.
 						
