@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Värd: localhost
--- Skapad: 31 maj 2012 kl 07:37
+-- Skapad: 01 jun 2012 kl 15:06
 -- Serverversion: 5.5.16
 -- PHP-version: 5.3.8
 
@@ -124,15 +124,14 @@ CREATE TABLE IF NOT EXISTS `playlists` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumpning av Data i tabell `playlists`
 --
 
 INSERT INTO `playlists` (`id`, `name`) VALUES
-(1, 'daniel'),
-(2, 'sylvain');
+(4, 'sylvain');
 
 -- --------------------------------------------------------
 
@@ -196,7 +195,16 @@ CREATE TABLE IF NOT EXISTS `users` (
   `name` varchar(50) NOT NULL,
   `password` varchar(40) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumpning av Data i tabell `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `password`) VALUES
+(1, 'mario', '202cb962ac59075b964b07152d234b70'),
+(2, 'sylvain', '202cb962ac59075b964b07152d234b70'),
+(3, 'daniel', '202cb962ac59075b964b07152d234b70');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
