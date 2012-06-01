@@ -1,5 +1,4 @@
 <?php // search.php
-require ('function/allfunctions.php'); // link to all the functions
 require ('connection.php'); //Link to connection
 interface Isearch  // Order all the functions
 {
@@ -8,7 +7,6 @@ interface Isearch  // Order all the functions
     public function dexonnection(); // Function for dexonnetion
     public function users(); // Function for users login
     public function createPlaylists(); // Function for creating the playlists
-    public function addSongPlaylists(); // Function for adding songs to play list.
     public function showAartists(); // Function for showing the artists
     public function showAlbums(); //Function for showing albums
     public function showGenres();// Function for showing genres
@@ -22,63 +20,27 @@ interface Isearch  // Order all the functions
     public function __construct()  // Consctruct the variables
     {   
 	if(isset($_POST['find'])){$this->find = $_POST['find'];} 
+	
+	if(isset($_POST['playlist']))
+	{
+		$this->playlistName = $_POST['playlist'];
+	}
+	
+	if(isset($_POST['songId']))
+	{
+		$this->songId = $_POST['songId'];
+	} 
+	
+	if(isset($_POST['add-playlist'])) {
+		
+		$this->pname = $_POST['playlist-name'];
+		
+	}
+	
      global $connection;
-
-     $this->pname = $_POST['playlist_name'];
-     $this->find = $_POST['find'];
-
      $this->connection = $connection;
      $this->connection = $connection;
     }
-
-
-     public function listing() { //Function for lsting objects
-    
-     if(isset($this->find)){
-        if($this->find)
-        {    
-            
-            $mysqli = $this->connection;
-            //$query ="SELECT artists.name, albums.album FROM artists LEFT JOIN albums ON artists.id=albums.artists_id";
-            $query = "SELECT songs.song as Song, albums.album as Album, artists.name as Artist FROM songs
-                         LEFT JOIN albums ON songs.id = albums.songs_id
-                        LEFT JOIN artists ON albums.id = artists.albums_id 
-                        WHERE song LIKE '%$this->find%'"; 
-            /*$query = "SELECT songs.song as Song, artists.name as Artist FROM songs
-                        LEFT JOIN artists on songs.id = artists.songs_id
-                        WHERE song LIKE '$this->find%'";    */        
-            $stmt = $mysqli->prepare($query);
-            $stmt->execute();
-            $stmt->bind_result($name,$album, $song);
-            
-            while($stmt->fetch()) 
-            
-            {
-                echo "<table border='1'>";
-                echo "<th>Songs</th><th>Album</th><th>Artists</th>";
-                echo "<tr><td>".$name."</td><td>" .$album."</td><td>".$song."</td>";
-                echo "</table>";
-                //echo $name. " " . $song ."<br />";
-                //session_start();    
-                //header('location:findtrue.php ');    
-                
-                        
-             }
-            
-            if ($name == NULL || $song == NULL) 
-            {                
-                echo"Could not find the artist or song!<br />";
-                echo "<a href='../index.php'>Go back here</a>";
-            }
-         }
-        
-        else
-        {
-            echo "Couldn't found a result".'<br />';
-            echo 'You have to write something'.'<br />';
-            echo "<a href='../index.php'>Go back here</a>";
-        }
-        
 
      public function listing() //Function for lsting objects
      { 
@@ -88,42 +50,75 @@ interface Isearch  // Order all the functions
 				if($this->find !== '')//if the variable is not empety, exectued the code bellow
 				{ 
 		            $mysqli = $this->connection;
-		            //$query ="SELECT artists.name, albums.album FROM artists LEFT JOIN albums ON artists.id=albums.artists_id";
-		            $query = 	"SELECT songs.song as Song, albums.album as Album, artists.name as Artist FROM songs
-		                        LEFT JOIN albums ON songs.id = albums.songs_id
-		                        LEFT JOIN artists ON albums.id = artists.albums_id 
+
+		            $query = "SELECT songs.song as Song, songs.id , albums.album as Album, artists.artist as Artist FROM songs
+		                        LEFT JOIN albums ON albums.id = songs.albums_id
+                                LEFT JOIN artists ON artists.id = albums.artists_id
 		                        WHERE song LIKE '%".$this->find."%'
 		                        OR album LIKE '%".$this->find."%'
-								OR name LIKE '%".$this->find."%'";
-					$queryartist = NULL;
-		            /*$query = "SELECT songs.song as Song, artists.name as Artist FROM songs
-		                        LEFT JOIN artists on songs.id = artists.songs_id
-		                        WHERE song LIKE '$this->find%'";    */        
-		            $stmt = $mysqli->prepare($query);
-		            $stmt->execute();
-		            $stmt->bind_result($name,$album, $song);
-					echo "<table border='1'>";
-		            echo "<th>Songs</th><th>Albums</th><th>Artists</th>";
-		            while($stmt->fetch())  
-		            {
-		                echo "<tr><td>".$name."</td><td>" .$album."</td><td>".$song."</td></t>";       
-		             }
-		            echo "</table>";  
-		            if ($name == NULL || $album == NULL ||$song == NULL) 
-		            {
+								OR artist LIKE '%".$this->find."%'";
+								
 
-		                echo"Could not find the artist or the song your searched!<br />";     
-		                echo"Please try again!<br />";            
-		            }
+					
+					$queryPlaylistName = "SELECT name FROM playlists";
+					$queryartist = NULL;					
+		            $stmt1 = $mysqli->prepare($query);
+		            $stmt1->bind_result($song, $id, $album, $artist);
+		            $stmt1->execute();
+					$songs = array();
+					$i = 0;
+					while($stmt1->fetch()){
+			            if ($artist == NULL || $album == NULL ||$song == NULL) 
+			            {
+	
+			                echo"Could not find the artist or the song your searched!<br />";     
+			                echo"Please try again!<br />";            
+			            }
+						$songs[$i] = array();
+						$songs[$i]['song'] = $song;
+						$songs[$i]['artist'] = $artist;
+						$songs[$i]['album'] = $album;
+						$songs[$i]['id'] = $id;
+						$i++;
+					}
+					$stmt1->close();
+					$stmt2 = $mysqli->prepare($queryPlaylistName);
+					$stmt2->bind_result($playlistNames);
+					$stmt2->execute();
+					$playlists = array();
+					while($stmt2->fetch()){ 
+						$playlists[]=$playlistNames;
+					}
+					
+					echo "<table border='1'>";
+		            echo "<th>Song Id</th><th>Songs</th><th>Albums</th><th>Artists</th>";
+					echo "<form action='./includes/functions.php' method='post'>
+							<input type='text' name='songId' placeholder='Song Id' />
+							<select name='playlists'>";
+								foreach($playlists as $playlistName){ 
+									 echo "<option>".$playlistName."</option>";
+								 }
+					echo "	</select>
+							<input type='submit' name='playlist' value='Add song' />
+						  </form>";
+		            foreach($songs as $song){
+		                echo "<tr><td>".$song['id']."</td><td>".$song['song']."</td><td>" .$song['album']."</td><td>".$song['artist']."</td></tr>";
+						
+						// Kvar att göra, en for loop som skriver ut all spellistor som finns.
+						
+					}
+		            echo "</table>";  
+
 		           } 
 		          elseif($this->find == '')
 		          {
 		           	 echo"Opps, you have to write something on the searchfield.<br />";     
 		             echo"Please try again!<br />";  
 		          }
+				  
+				  
 
 	      }
-	      
      }
    
     public function connection() //Functions for the connection to the server and the database
@@ -140,39 +135,39 @@ interface Isearch  // Order all the functions
     {
         
     }
-
     public function createPlaylists()// Function for creating the playlists
     {
-        $mysqli = $this->connection;
-        
-		$query = "INSERT playlists SET name = '$this->pname'";
-		$stmt = $mysqli->prepare($query);
-		$stmt->execute();
-		while($stmt->fetch()) {
-			echo "Spellista skapad med namnet: ".$this->pname;
-		} 
+    	$mysqli = $this->connection;
+    	if(isset($_POST['playlist'])) {
+	    	$this->playlistName;
+	    	$this->songId;
+			
+			$queryPlaylistId = "SELECT id FROM playlists WHERE name = '$this->playlistName'";
+			
+			$stmt1 = $mysqli->prepare($queryPlaylistId);
+			$stmt1->bind_result($pId);
+			$stmt1->execute();
+			$stmt1->fetch();
+			$queryAdd = "INSERT INTO contains_songs_playlists(playlists_id, songs_id) VALUE(?, ?)";
+	
+			$stmt2 = $mysqli->prepare($queryAdd);
+			$stmt2->bind_param("ii", $pId, $this->songId);
+			$stmt2->execute();
+			echo "<br />Hello World";
+		}
     }
     
-    public function addSongPlaylists() {
-		
-		$mysqli = $this->connection;
-		
-		$playlist
-		/*
-		 * SELECT songs.song as Song, albums.album as Album, artists.name as Artist FROM songs
-                         LEFT JOIN albums ON songs.id = albums.songs_id
-                        LEFT JOIN artists ON albums.id = artists.albums_id 
-                        WHERE song LIKE '%$this->find%'"; 
-		 */
-		 "SELECT id FROM playlists WHERE name = ".$playlist." UPDATE contains_songs_playlists";
-		 
-		 
-		$query = "UPDATE contains_songs_playlists 
-					LEFT JOIN playlists ON playlists.id = contains_songs_playlists.playlists_id
-					LEFT JOIN songs ON songs.id = contains_songs_playlists.songs_id
-					WHERE ";
+    public function addPlaylist() {
+		if(isset($_POST['add-playlist'])) {
+		    $mysqli = $this->connection;
+			//queryn funkar men efter det blir det knas
+			$query = "INSERT INTO playlists(name) VALUE('$this->pname')";
+			$stmt = $mysqli->prepare($query);
+			$stmt->execute();
+			echo "Spellista skapad med namnet: ".$this->pname;
+		}
 	}
-    
+	
     public function showAartists()// Function for showing the artists
     {
         
@@ -197,6 +192,7 @@ interface Isearch  // Order all the functions
 }
 
 $newSearch = new Search(); // The instance of search´s class
-$newSearch->createPlaylists();
 $newSearch->listing(); // Printing out search function
+$newSearch->createPlaylists();
+$newSearch->addPlaylist();
 ?>
