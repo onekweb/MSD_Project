@@ -176,14 +176,20 @@ interface Isearch  // Order all the functions
 
     
     public function addPlaylist() {
-		if(isset($_POST['add-playlist'])) {
-
-		    $mysqli = $this->connection;
-			$query = "INSERT INTO playlists(name) VALUE('$this->pname')";
+				
+			/*if(isset($_POST['add-playlist'])) {
+		$userid = $_SESSION['id'];
+			$playlist = $_POST['add-playlist'];
+		    $mysqli = $this->connection;			
+			$query = "INSERT INTO playlists(name, users_id) VALUE(?, ?)";			
 			$stmt = $mysqli->prepare($query);
+			$stmt->bind_param("si", $playlist, $userid);
+			
 			$stmt->execute();
 			echo "Spellista skapad med namnet: ".$this->pname;
+				
 		}
+			 * */
 	}
 
     public function showAartists()// Function for showing the artists
@@ -204,7 +210,7 @@ interface Isearch  // Order all the functions
         
     }
     public function showPlayLists()// Function for showing the playlists
-    {
+    {/*
 		$mysqli = $this->connection;
 		
 		$getPlaylist = "SELECT name, id FROM playlists";
@@ -236,7 +242,9 @@ interface Isearch  // Order all the functions
 				</tr>
 			";
 		}
-		
+
+	 * 
+	 */		
     }
 }
 
