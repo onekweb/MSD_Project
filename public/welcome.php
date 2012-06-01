@@ -3,9 +3,9 @@
 <?php
 session_start();
 	
-if(isset($_SESSION['name'])){
+if(isset($_SESSION['user'])){
 				
-			print "<p class='welcome'>Welcome ". $_SESSION['name']."</p> ";
+			print "<p class='welcome'>Welcome ". $_SESSION['user']."</p> ";
 			
 
 ?>

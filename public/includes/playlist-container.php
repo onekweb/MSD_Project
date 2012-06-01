@@ -1,13 +1,26 @@
 	<table id="playlist-table">
 						<tbody>
+							
+								
+								<th  class="add-playlist-containder">My playlists</th>
 							<tr>
-								<h3>Playlists</h3>
-								<th class="playlist">Name</th>
-							</tr>
-							<tr>
+								<tr>			
 								<td>#</td>
-						
+								</tr>
+									<tr>			
+								<td>#</td>
+								</tr>			
 							</tr>
+						
+									
+								<th  class="add-playlist-containder">Other user´s playlist</th>
+							<tr>			
+								<td>#</td>
+								</tr>
+									<tr>			
+								<td>#</td>
+								</tr>
+						
 							
 						</tbody>
 					</table>

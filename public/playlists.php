@@ -1,11 +1,24 @@
 <?php
 session_start();
 	
-if(isset($_SESSION['name'])){
-				
-			print "<p class='welcome'>Welcome ". $_SESSION['name']."</p> ";
+if(isset($_SESSION['user'])){
+			$userid = $_SESSION['id'];
+	//$name =  $_SESSION['name'];
+			//$playlist = $_POST['playlist-name'];
+		    $mysqli = new mysqli('localhost', 'root', '', 'msd_project');
+			$query = "SELECT playlists.name , users.user from playlists
+						LEFT JOIN users ON users.id = playlists.users_id
+						WHERE name LIKE '%".$_SESSION['name']."%' ";			
+			$stmt = $mysqli->prepare($query);
 			
-
+			//$stmt->bind_param("si", $name, $id);
+			$stmt->bind_result($name, $userid);			
+			$stmt->execute();			
+			$stmt->fetch();
+			
+			print "<p class='welcome'>Welcome ". $_SESSION['user']."</p> ";
+}
+	
 ?>
 
 	
@@ -28,7 +41,39 @@ if(isset($_SESSION['name'])){
 			</div>
 			<!-- #statistic ends here -->
 			<div id="add-playlist-containder">         
-				<?php require('includes/playlist-container.php')?>
+						<table id="playlist-table">
+						<tbody>
+						
+								<th  class="add-playlist-containder">My playlists</th>
+							
+								
+								<tr>		
+							<?php while($stmt->fetch())
+									{
+										
+									?>
+										
+								<td style="color:#fff;"> <?php echo $name.'<br />'; ?></td>
+								</tr>
+								<?php  } 	?>
+									<tr>			
+								
+								</tr>			
+							
+						
+									
+								<th  class="add-playlist-containder">Other user´s playlist</th>
+							<tr>			
+								<td>#</td>
+								</tr>
+									<tr>			
+								<td>#</td>
+								</tr>
+						
+							
+						</tbody>
+					</table>
+							
                 </div>
             <!-- #add-playlist-containder ends here-->   
 		</div>
@@ -42,8 +87,8 @@ if(isset($_SESSION['name'])){
 	
 </html>
 <?php 
-}else
-{
-	header('location:index.php');
-}
+//}else
+//{
+//	header('location:index.php');
+//}
 ?>

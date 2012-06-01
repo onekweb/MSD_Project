@@ -238,6 +238,13 @@ background: none repeat scroll 0 0 #FFFFFF;
 
 
 /* ADDPLAYLIST*/
+.playlists-name
+{
+    color: 				#FFFFFF;
+    height: 			auto;
+    text-align: 		center;
+    width:				 100%;	
+}
 #add-playlist-containder
 {
   background: none repeat scroll 0 0 #000000;
@@ -251,13 +258,14 @@ background: none repeat scroll 0 0 #FFFFFF;
     width: 285px;
 }
 
-#add-playlist-containder h3
+.add-playlist-containder
 {
 	width:				300px;
 	height:				20px;
 	background:			#8684ee;	
 	padding:			0px 0px 0px 10px;
 	margin-top:			0px;
+	color:				#fff;
 }
 .addplay-list-fieldset
 {

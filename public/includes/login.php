@@ -15,17 +15,17 @@ if(mysqli_errno($connection))
 	echo "Failed to connect". mysqli_connect_error();
 	exit();
 }
-	if($stmt = $connection->prepare("SELECT id, name, password FROM users WHERE name = ? AND password = ?"))
+	if($stmt = $connection->prepare("SELECT id, user, password FROM users WHERE user = ? AND password = ?"))
 	{
 		$stmt->bind_param("ss", $name, $password);
 		$stmt->bind_result($id, $name, $password);
 		$stmt->execute();
 		if($stmt->fetch())
 		{
-			$_SESSION['name'] = $name;			
+			$_SESSION['user'] = $name;			
 			$_SESSION['id'] = $id;
 			header('location:welcome.php');
-			print "<p class='welcome'>Welcome ". $_SESSION['name']."</p>";
+			print "<p class='welcome'>Welcome ". $_SESSION['user']."</p>";
 		}
 		else
 		{

@@ -1,6 +1,6 @@
 <?php
 session_start();	
-if(isset($_SESSION['name'])){				
+if(isset($_SESSION['user'])){				
 		if(isset($_POST['playlist-name'])) {
 			$userid = $_SESSION['id'];
 			$playlist = $_POST['playlist-name'];
@@ -9,12 +9,12 @@ if(isset($_SESSION['name'])){
 			$stmt = $mysqli->prepare($query);
 			$stmt->bind_param("si", $playlist, $userid);			
 			$stmt->execute();
-			echo "Spellista skapad med namnet: ".$playlist;
+			echo " <p class='playlists-name'>You have now created  ".$playlist."</p>";
 				
 		}				
 						
 			//$_SESSION['id'] = $id;	
-			print "<p class='welcome'>Welcome ". $_SESSION['name']."</p> ";
+			print "<p class='welcome'>Welcome ". $_SESSION['user']."</p> ";
 			
 
 ?>
