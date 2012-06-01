@@ -168,6 +168,8 @@ interface Isearch  // Order all the functions
 			$stmt2 = $mysqli->prepare($queryAdd);				//Här förbereds queryn
 			$stmt2->bind_param("ii", $pId, $this->songId);		//Här binder vi parametrar för att kunna skicka in i queryn
 			$stmt2->execute();									//Kör queryn
+			
+			echo "Success!";
 		}
 	}
     
@@ -203,7 +205,38 @@ interface Isearch  // Order all the functions
     }
     public function showPlayLists()// Function for showing the playlists
     {
-        
+		$mysqli = $this->connection;
+		
+		$getPlaylist = "SELECT name, id FROM playlists";
+		$stmt1 = $mysqli->prepare($getPlaylist);
+		$stmt1->bind_result($name, $id);
+		$stmt1->execute();
+		$i = 0;
+		while($stmt1->fetch()) {
+			$playlistId[$i] = array();
+			$playlistId[$i]['id'] = $id;
+			$i++;
+			echo "	<table border='1px'>
+						<th>
+							".$name."
+						</th>";
+		}
+		$stmt1->close();
+		
+		$getSongs = "SELECT song_id FROM contains_songs_playlists WHERE playlist_id = '$id'";
+		$stmt2 = $mysqli->prepare($getSongs);
+		$stmt2->bind_result($songId);
+		$stmt2->execute();
+		while($stmt2->fetch()) {
+			echo "
+				<tr>
+					<td>
+						".$songId."
+					</td>
+				</tr>
+			";
+		}
+		
     }
 }
 
@@ -211,4 +244,5 @@ $newSearch = new Search(); // The instance of search´s class
 $newSearch->listing(); // Printing out search function
 $newSearch->createPlaylists();
 $newSearch->addPlaylist();
+$newSearch->showPlayLists();
 ?>
