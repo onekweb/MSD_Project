@@ -21,15 +21,16 @@ interface Isearch  // Order all the functions
     {   
 	if(isset($_POST['find'])){$this->find = $_POST['find'];} 
 	
-	if(isset($_POST['playlist']))
+	if(isset($_POST['add_songPlaylist']))
 	{
-		$this->playlistName = $_POST['playlist'];
+		$this->playlistName = $_POST['playlistName'];
+		$this->songId = $_POST['songId'];
 	}
 	
-	if(isset($_POST['songId']))
+	/*if(isset($_POST['songId']))
 	{
-		$this->songId = $_POST['songId'];
-	} 
+		
+	} */
 	
 	if(isset($_POST['add-playlist'])) {
 		
@@ -102,12 +103,12 @@ interface Isearch  // Order all the functions
 					
 			echo "<form action='./includes/functions.php' method='post'>
 			<input type='text' name='songId' placeholder='Song Id' />
-			<select name='playlists'>";
+			<select name='playlistName'>";
 			foreach($playlists as $playlistName){
 				echo "<option>".$playlistName."</option>";
 			}
 			echo " </select>
-			<input type='submit' name='playlist' value='Add song' />
+			<input type='submit' name='add_songPlaylist' value='Add song' />
 			</form>";
 			foreach($songs as $song){
 				echo "<tr><td>".$song['id']."</td><td>".$song['song']."</td><td>" .$song['album']."</td><td>".$song['artist']."</td><td>".$song['genre']."</tr>";
@@ -146,24 +147,31 @@ interface Isearch  // Order all the functions
     public function createPlaylists()// Function for creating the playlists
     {
     	$mysqli = $this->connection;
-    	if(isset($_POST['playlist'])) {
-	    	$this->playlistName;
-	    	$this->songId;
+    	if(isset($_POST['add_songPlaylist'])) { //Ser ifall man har tryckt på 'Add song'{
+	    	$this->playlistName; 	//Hämtar spellistenamnet
+	    	$this->songId;			//Hämtar songId
 			
-			$queryPlaylistId = "SELECT id FROM playlists WHERE name = '$this->playlistName'";
+			$queryPlaylistId = "SELECT id FROM playlists WHERE name = '$this->playlistName'"; //En query för att hämta spelliste id:t som är associerat med namnet
 			
-			$stmt1 = $mysqli->prepare($queryPlaylistId);
-			$stmt1->bind_result($pId);
-			$stmt1->execute();
-			$stmt1->fetch();
-			$queryAdd = "INSERT INTO contains_songs_playlists(playlists_id, songs_id) VALUE(?, ?)";
+			$stmt1 = $mysqli->prepare($queryPlaylistId);	//Förbereder queryn
+			$stmt1->bind_result($pId);						//Binder resultatet till en variabel
+			$stmt1->execute();								//Kör queryn
+			$i = 0;
+			while($stmt1->fetch()) {						//För att ha kvar värdet som vi har fått ut så lägger vi in den i en array.
+				$playlistId[$i] = array();					//Går inte att skicka in $playlistId['id'] i nästa query, men vi måste ha kvar den här för att behålla
+				$playlistId[$i]['id'] = $pId;				//ett värde på $pId som går att skicka in.
+				$i++;
+			}
+			$stmt1->close();
+			$queryAdd = "INSERT INTO contains_songs_playlists(playlists_id, songs_id) VALUE(?, ?)";	//Den här queryn lägger in låten och spellistan i en kopplingstabell.
 	
-			$stmt2 = $mysqli->prepare($queryAdd);
-			$stmt2->bind_param("ii", $pId, $this->songId);
-			$stmt2->execute();
-			echo "<br />Hello World";
+			$stmt2 = $mysqli->prepare($queryAdd);				//Här förbereds queryn
+			$stmt2->bind_param("ii", $pId, $this->songId);		//Här binder vi parametrar för att kunna skicka in i queryn
+			$stmt2->execute();									//Kör queryn
 		}
-    }
+	}
+    
+
     
     public function addPlaylist() {
 		if(isset($_POST['add-playlist'])) {
