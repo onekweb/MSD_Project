@@ -93,8 +93,13 @@ interface Isearch  // Order all the functions
 			$playlists[]=$playlistNames;
 			}
 			
-			echo "<table border='1'>";
-			echo "<th>Song Id</th><th>Songs</th><th>Albums</th><th>Artists</th><th>Genre</th>";
+			echo "<table id='result-table'>";
+			echo "	<th id='result-th'>Song Id</th>
+					<th id='result-th'>Songs</th>
+					<th id='result-th'>Albums</th>
+					<th id='result-th'>Artists</th>
+					<th id='result-th'>Genre</th>";
+					
 			echo "<form action='./includes/functions.php' method='post'>
 			<input type='text' name='songId' placeholder='Song Id' />
 			<select name='playlists'>";
@@ -162,8 +167,8 @@ interface Isearch  // Order all the functions
     
     public function addPlaylist() {
 		if(isset($_POST['add-playlist'])) {
+			
 		    $mysqli = $this->connection;
-			//queryn funkar men efter det blir det knas
 			$query = "INSERT INTO playlists(name) VALUE('$this->pname')";
 			$stmt = $mysqli->prepare($query);
 			$stmt->execute();
