@@ -24,12 +24,11 @@ if(mysqli_errno($connection))
 		{
 			$_SESSION['name'] = $name;			
 			$_SESSION['id'] = $id;
-			header('location:welcome.php');
-			print "<p class='welcome'>Welcome ". $_SESSION['name']."</p>";
+			print "Welcome ". $_SESSION['name'];
 		}
 		else
 		{
-			print "<p class='error-message'>Invalid password or username </p>";
+			print "Invalid password or username";
 		}
 		
 	}	
@@ -38,18 +37,17 @@ if(mysqli_errno($connection))
 
 if(isset($_POST['name']) && isset($_POST['password']))
 {
-	
 	echo login($_POST['name'], $_POST['password']);
 }
 
 ?>
 
  
- <div id="login-container"> 
-  <a href="#" id="loginButton"><span>Login</span><em></em></a>
+ <div id="login-container1"> 
+  <a href="#" id="loginButton1"><span>Login</span><em></em></a>
                 <div style="clear:both"></div>
                 <div id="loginBox">                
-                    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" id="loginForm"/>
+                    <form action=" login-test.php" method="post" id="loginForm"/>
                         <fieldset id="body">
                             <fieldset>
                                 <label for="username">Username</label>

@@ -2,7 +2,8 @@
 	<body>
 		<div id="top">
 			<?php include('includes/login.php');?>
-			<?php include('includes/logo-linksphp');?>
+			
+			<?php include('includes/logo.php');?>
 		</div
             <!-- #top ends here -->
 		<div id="wrapper">

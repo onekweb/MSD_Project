@@ -33,6 +33,7 @@ p{}
 	background: 		#000;
 	background-position: center; 
 	display: 			block;
+	color:				#fff;		
  }
 #logo
 {
@@ -70,9 +71,39 @@ p{}
 	position:			absolute;
 	right: 				30px;
 } 
+.error-message
+{
+	color: 				red;
+    position: 			absolute;
+    right: 				237px;	
+}
+.welcome
+{
+	color: 				#fff;
+    position: 			absolute;
+    right: 				237px;	
+}
+
+#logout{	
+background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #899CAA;
+    border-radius: 3px 3px 3px 3px;
+    cursor: pointer;
+    display: inline-block;
+    float: right;
+    height: 26px;
+    position: relative;
+    text-align: center;
+    width: 75px;
+    z-index: 30;
+    text-shadow: 1px 1px #FFFFFF;
+    font-weight: 	bold;
+    height:		34px;
+    text-shadow: 1px 1px #FFFFFF;
+ }
 #links
 {
-	width:				300px;
+	width:				410px;
 	height:				auto;
 	background:			red;
 }
@@ -338,7 +369,7 @@ p{}
 #footer p
 {
 	color:				#fff;
-	text-align: 		center;-moz-binding;
+	text-align: 		center;
 	line-height: 		60px;
 	padding:			0;
 	margin:				0;

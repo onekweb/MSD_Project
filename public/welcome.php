@@ -1,3 +1,5 @@
+
+
 <?php
 session_start();
 	
@@ -8,29 +10,34 @@ if(isset($_SESSION['name'])){
 
 ?>
 
-	
-
+			
 
 <?php include('includes/header.php');?>
 	<body>
-		<div id="top">
+		<div id="top">	
 			<a href="logout.php" id="logout">Logout</a>
 			
 			<?php include('includes/logo.php');?>
 			<div id="links">		
 			<?php include('links.php');?>
 			</div>
-			</div>
+		
+		</div>
             <!-- #top ends here -->
 		<div id="wrapper">
 			<div id="stastic">
 				<?php include('includes/statistic.php');?>	
 			</div>
 			<!-- #statistic ends here -->
-			<div id="add-playlist-containder">         
-				<?php require('includes/addplaylist-container.php')?>
+			<div id="search-field">
+				<?php include('includes/searchfield.php');?>	
+			</div>
+			<!-- #search-field ends here-->
+                <div id="show-result">
+                <?php require('includes/functions.php')?>
                 </div>
-            <!-- #add-playlist-containder ends here-->   
+                
+			<!--  #show-result ends here-->
 		</div>
 			<!--  #wrapper ends here -->
 
@@ -41,6 +48,7 @@ if(isset($_SESSION['name'])){
 	</body>
 	
 </html>
+
 <?php 
 }else
 {

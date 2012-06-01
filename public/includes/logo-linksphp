@@ -1,4 +1,0 @@
-<div id ="logo"><a href="index.php"><img src="img/header-bg.png"></div>
-				<div class="link-addplaylist"><a href="add-playlist.php">Add playlist</a></div>					
-				<div class="link-playlist"><a href="playlists.php">Playlist</a></div>
-			</div>
