@@ -158,7 +158,7 @@ interface Isearch  // Order all the functions
 			$stmt1->execute();								//Kör queryn
 			$i = 0;
 			while($stmt1->fetch()) {						//För att ha kvar värdet som vi har fått ut så lägger vi in den i en array.
-				$playlistId[$i] = array();					//Går inte att skicka in $playlistId['id'] i nästa query, men vi måste ha kvar den här för att behålla
+				$playlistId[$i] = array();					//Går inte att skicka in $playlistId['id'](kan kanske bero på att den är multidimensionell) i nästa query, men vi måste ha kvar den här för att behålla
 				$playlistId[$i]['id'] = $pId;				//ett värde på $pId som går att skicka in.
 				$i++;
 			}
