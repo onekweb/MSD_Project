@@ -8,7 +8,7 @@ if(isset($_SESSION['user'])){
 		    $mysqli = new mysqli('localhost', 'root', '', 'msd_project');
 			$query = "SELECT playlists.name , users.user from playlists
 						LEFT JOIN users ON users.id = playlists.users_id
-						WHERE name LIKE '%".$_SESSION['name']."%' ";			
+						WHERE users_id = $userid";			
 			$stmt = $mysqli->prepare($query);
 			
 			//$stmt->bind_param("si", $name, $id);
@@ -62,10 +62,28 @@ if(isset($_SESSION['user'])){
 							
 						
 									
-								<th  class="add-playlist-containder">Other user´s playlist</th>
+								<th  class="add-playlist-containder">All playllists</th>
 							<tr>			
-								<td>#</td>
+								  <?php 
+									  $mysqli = new mysqli('localhost', 'root', '', 'msd_project');
+									   $queryall = "SELECT playlists.name , users.user from playlists
+													LEFT JOIN users ON users.id = playlists.users_id
+													WHERE users_id ";			
+										$stmt1 = $mysqli->prepare($queryall);
+										
+										//$stmt->bind_param("si", $name, $id);
+										$stmt1->bind_result($allname, $alluserid);			
+										$stmt1->execute();			
+										$stmt1->fetch();
+									?>
+									<?php while($stmt1->fetch())
+									{
+										
+									?>
+										
+								<td style="color:#fff;"> <?php echo $allname.'<br />'; ?></td>
 								</tr>
+								<?php  } 	?>
 									<tr>			
 								<td>#</td>
 								</tr>

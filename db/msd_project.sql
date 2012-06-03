@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Värd: localhost
--- Skapad: 01 jun 2012 kl 15:06
+-- Skapad: 03 jun 2012 kl 17:38
 -- Serverversion: 5.5.16
 -- PHP-version: 5.3.8
 
@@ -19,17 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Databas: `msd_project`
 --
-
--- --------------------------------------------------------
-
---
--- Tabellstruktur `access_users_playlists`
---
-
-CREATE TABLE IF NOT EXISTS `access_users_playlists` (
-  `users_id` int(11) NOT NULL,
-  `playlists_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -123,6 +112,7 @@ INSERT INTO `genres` (`id`, `genre`) VALUES
 CREATE TABLE IF NOT EXISTS `playlists` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
+  `users_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
@@ -130,8 +120,11 @@ CREATE TABLE IF NOT EXISTS `playlists` (
 -- Dumpning av Data i tabell `playlists`
 --
 
-INSERT INTO `playlists` (`id`, `name`) VALUES
-(4, 'sylvain');
+INSERT INTO `playlists` (`id`, `name`, `users_id`) VALUES
+(1, 'sylvains playlist', 1),
+(2, 'Hello', 1),
+(3, 'mamamia', 1),
+(4, 'good by', 1);
 
 -- --------------------------------------------------------
 
@@ -192,7 +185,7 @@ INSERT INTO `songs` (`id`, `song`, `albums_id`) VALUES
 
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL,
+  `user` varchar(50) NOT NULL,
   `password` varchar(40) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
@@ -201,10 +194,21 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Dumpning av Data i tabell `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `password`) VALUES
-(1, 'mario', '202cb962ac59075b964b07152d234b70'),
-(2, 'sylvain', '202cb962ac59075b964b07152d234b70'),
-(3, 'daniel', '202cb962ac59075b964b07152d234b70');
+INSERT INTO `users` (`id`, `user`, `password`) VALUES
+(1, 'sylvain', '123'),
+(2, 'daniel', '123'),
+(3, 'mario', '123');
+
+-- --------------------------------------------------------
+
+--
+-- Tabellstruktur `users_playlists`
+--
+
+CREATE TABLE IF NOT EXISTS `users_playlists` (
+  `users_id` int(11) NOT NULL,
+  `playlists_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
