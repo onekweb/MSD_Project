@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Värd: localhost
--- Skapad: 03 jun 2012 kl 17:38
+-- Skapad: 07 jun 2012 kl 10:22
 -- Serverversion: 5.5.16
 -- PHP-version: 5.3.8
 
@@ -82,6 +82,15 @@ CREATE TABLE IF NOT EXISTS `contains_songs_playlists` (
   `songs_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumpning av Data i tabell `contains_songs_playlists`
+--
+
+INSERT INTO `contains_songs_playlists` (`playlists_id`, `songs_id`) VALUES
+(1, 0),
+(5, 0),
+(4, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -114,7 +123,7 @@ CREATE TABLE IF NOT EXISTS `playlists` (
   `name` varchar(50) NOT NULL,
   `users_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
 -- Dumpning av Data i tabell `playlists`
@@ -124,7 +133,17 @@ INSERT INTO `playlists` (`id`, `name`, `users_id`) VALUES
 (1, 'sylvains playlist', 1),
 (2, 'Hello', 1),
 (3, 'mamamia', 1),
-(4, 'good by', 1);
+(4, 'good by', 1),
+(5, 'onekanda', 3),
+(6, 'joel', 3),
+(7, 'yooo', 3),
+(8, 'daniel', 2),
+(9, 'daniel2012', 2),
+(10, 'kyh2012', 2),
+(11, 'mario', 3),
+(12, 'Jesus', 4),
+(13, 'DRC', 4),
+(14, 'Cool2012', 4);
 
 -- --------------------------------------------------------
 
@@ -188,7 +207,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `user` varchar(50) NOT NULL,
   `password` varchar(40) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumpning av Data i tabell `users`
@@ -197,7 +216,9 @@ CREATE TABLE IF NOT EXISTS `users` (
 INSERT INTO `users` (`id`, `user`, `password`) VALUES
 (1, 'sylvain', '123'),
 (2, 'daniel', '123'),
-(3, 'mario', '123');
+(3, 'mario', '123'),
+(4, 'Jessica', '123'),
+(5, 'Jenny', '123');
 
 -- --------------------------------------------------------
 
